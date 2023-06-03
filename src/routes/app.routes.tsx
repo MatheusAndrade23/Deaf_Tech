@@ -11,9 +11,6 @@ import { Home } from "@screens/Home";
 
 type AppRoutes = {
   home: undefined;
-  rank: undefined;
-  question: undefined;
-  monitoring: undefined;
 };
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;

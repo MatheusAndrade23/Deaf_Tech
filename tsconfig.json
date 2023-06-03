@@ -15,5 +15,6 @@
       "@contexts/*": ["./src/contexts/*"],
       "@routes/*": ["./src/routes/*"]
     }
-  }
+  },
+  "typeRoots": ["./types"]
 }
