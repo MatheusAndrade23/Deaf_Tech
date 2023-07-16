@@ -1,11 +1,11 @@
-import { Center, Spinner, IBoxProps } from "native-base";
+import { Center, Spinner, ICenterProps } from 'native-base';
 
-type LoadingProps = IBoxProps & {};
+type LoadingProps = ICenterProps & {};
 
 export const Loading = ({ ...rest }: LoadingProps) => {
   return (
     <Center {...rest}>
-      <Spinner color="lightColor" />
+      <Spinner color="lightColor" size="lg" />
     </Center>
   );
 };

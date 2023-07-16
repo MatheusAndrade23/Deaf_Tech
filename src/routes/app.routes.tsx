@@ -1,16 +1,18 @@
-import { Platform } from "react-native";
-import { useTheme } from "native-base";
+import { Platform } from 'react-native';
+import { useTheme } from 'native-base';
 import {
   createBottomTabNavigator,
   BottomTabNavigationProp,
-} from "@react-navigation/bottom-tabs";
+} from '@react-navigation/bottom-tabs';
 
-import { House } from "phosphor-react-native";
+import { House, GearSix, Question } from 'phosphor-react-native';
 
-import { Home } from "@screens/Home";
+import { Home } from '@screens/Home';
 
 type AppRoutes = {
   home: undefined;
+  settings: undefined;
+  help: undefined;
 };
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
@@ -27,12 +29,12 @@ export const AppRoutes = () => {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: colors.blue.light,
-        tabBarInactiveTintColor: colors.blue.deep,
+        tabBarActiveTintColor: colors.gray.primary,
+        tabBarInactiveTintColor: colors.gray.secondary,
         tabBarStyle: {
-          backgroundColor: colors.lightColor,
+          backgroundColor: colors.secondaryColor,
           borderTopWidth: 0,
-          height: Platform.OS === "android" ? "auto" : 96,
+          height: Platform.OS === 'android' ? 'auto' : 96,
           paddingBottom: sizes[8],
           paddingTop: sizes[8],
         },
@@ -43,7 +45,29 @@ export const AppRoutes = () => {
         name="home"
         component={Home}
         options={{
-          tabBarIcon: ({ color }) => <House size={iconSize} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <House size={iconSize} color={color} weight="bold" />
+          ),
+        }}
+      />
+
+      <Screen
+        name="settings"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <GearSix size={iconSize} color={color} weight="bold" />
+          ),
+        }}
+      />
+
+      <Screen
+        name="help"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Question size={iconSize} color={color} weight="bold" />
+          ),
         }}
       />
     </Navigator>

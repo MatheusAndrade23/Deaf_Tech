@@ -15,26 +15,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.deaftech.app"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.deaftech.app"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "onesignal-expo-plugin",
-        {
-          "mode": "development"
-        }
-      ]
-    ]
+    }
   }
 }
