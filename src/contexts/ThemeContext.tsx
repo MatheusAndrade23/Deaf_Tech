@@ -2,9 +2,7 @@ import { createContext, ReactNode, useState } from 'react';
 
 import { NativeBaseProvider, extendTheme } from 'native-base';
 
-import { darkTheme } from '@theme/modes/darkTheme';
-import { lightTheme } from '@theme/modes/lightTheme';
-import { baseTheme } from '@theme/baseTheme';
+import { darkTheme, lightTheme, baseTheme } from '@theme/index';
 
 interface ThemeContextType {
   changeTheme: () => void;
