@@ -55,7 +55,7 @@ export const SignUp = () => {
             mt="4"
             h="12"
             variant="secondary"
-            icon={<User color={colors.gray.tertiary} />}
+            icon={<User color={colors.gray.tertiary} size="20" weight="bold" />}
           />
         </VStack>
       </Center>

@@ -50,7 +50,9 @@ export const SignIn = () => {
             mt="4"
             h="12"
             variant="secondary"
-            icon={<UserPlus color={colors.gray.tertiary} />}
+            icon={
+              <UserPlus color={colors.gray.tertiary} size="20" weight="bold" />
+            }
           />
         </VStack>
       </Center>
