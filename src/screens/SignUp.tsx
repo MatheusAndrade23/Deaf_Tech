@@ -23,7 +23,7 @@ export const SignUp = () => {
       <Center flex={1} px="8">
         <Image source={Logo} alt="Logotipo" w="200" h="180" />
         <Text color="secondaryColor" fontFamily="heading" fontSize="md" mb="4">
-          Acesse sua conta
+          Crie uma conta
         </Text>
         <Input
           title="Email:"
@@ -41,7 +41,7 @@ export const SignUp = () => {
           icon={<LockSimple color={colors.gray.tertiary} />}
         />
         <Button
-          text="Entrar"
+          text="Criar conta"
           mt="4"
           icon={<UserPlus color={colors.secondaryColor} weight="bold" />}
         />
