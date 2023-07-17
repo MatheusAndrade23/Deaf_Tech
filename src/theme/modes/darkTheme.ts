@@ -2,11 +2,12 @@ export const darkTheme = {
   colors: {
     bgColor: '#121214',
     primaryColor: '#00ADB5',
-    secondaryColor: '#FFFF',
+    secondaryColor: '#FFFFFF',
 
     gray: {
       primary: '#1C1C1F',
       secondary: '#9F9BA1',
+      tertiary: '#3E3A40',
     },
 
     red: {
