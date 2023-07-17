@@ -1,11 +1,20 @@
 import { useState } from 'react';
-import { Center, HStack, Switch, Text, useTheme, IBoxProps } from 'native-base';
+
+import {
+  Center,
+  Button,
+  Switch,
+  Text,
+  useTheme,
+  IButtonProps,
+  HStack,
+} from 'native-base';
 
 import { CategoryIcon } from '@components/CategoryIcon';
 
 import { ModuleDTO } from '@dtos/ModuleDTO';
 
-type Props = ModuleDTO & IBoxProps & {};
+type Props = ModuleDTO & IButtonProps & {};
 
 export const RoomCard = ({
   id,
@@ -23,43 +32,50 @@ export const RoomCard = ({
   };
 
   return (
-    <HStack
+    <Button
       w="full"
-      alignItems="center"
-      justifyContent="space-between"
       bg="gray.primary"
-      position="relative"
+      px={0}
       py="4"
       borderWidth={1}
       borderColor={batteryLevel < 25 ? 'red.middle' : 'gray.primary'}
+      _pressed={{ bg: 'gray.tertiary' }}
       {...rest}
     >
-      <CategoryIcon
-        category={category}
-        color={checked ? colors.secondaryColor : colors.gray.secondary}
-        position="absolute"
-        left={4}
-      />
-      <Center w="full" h="full">
-        <Text
+      <HStack
+        w="full"
+        h="full"
+        alignItems="center"
+        justifyContent="space-between"
+        position="relative"
+      >
+        <CategoryIcon
+          category={category}
           color={checked ? colors.secondaryColor : colors.gray.secondary}
-          fontFamily="body"
-          fontSize="md"
-        >
-          {name}
-        </Text>
-      </Center>
-      <Switch
-        p={0}
-        size="lg"
-        position="absolute"
-        right={4}
-        offTrackColor="gray.tertiary"
-        onTrackColor="primaryColor"
-        offThumbColor="gray.secondary"
-        isChecked={checked}
-        onToggle={handleChangeModuleState}
-      />
-    </HStack>
+          position="absolute"
+          left={4}
+        />
+        <Center w="full" h="full">
+          <Text
+            color={checked ? colors.secondaryColor : colors.gray.secondary}
+            fontFamily="body"
+            fontSize="md"
+          >
+            {name}
+          </Text>
+        </Center>
+        <Switch
+          p={0}
+          size="lg"
+          position="absolute"
+          right={4}
+          offTrackColor="gray.tertiary"
+          onTrackColor="primaryColor"
+          offThumbColor="gray.secondary"
+          isChecked={checked}
+          onToggle={handleChangeModuleState}
+        />
+      </HStack>
+    </Button>
   );
 };
