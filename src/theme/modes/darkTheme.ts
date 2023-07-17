@@ -8,6 +8,7 @@ export const darkTheme = {
       primary: '#1C1C1F',
       secondary: '#9F9BA1',
       tertiary: '#3E3A40',
+      quaternary: '#494141',
     },
 
     red: {
