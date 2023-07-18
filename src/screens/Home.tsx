@@ -24,6 +24,13 @@ export const Home = () => {
       batteryLevel: 20,
       active: false,
     },
+    {
+      id: '3',
+      name: 'Jardim',
+      category: 'Garden',
+      batteryLevel: 100,
+      active: true,
+    },
   ]);
 
   const { colors } = useTheme();
@@ -43,12 +50,12 @@ export const Home = () => {
       </HStack>
       <FlatList
         flex={1}
-        mt={4}
+        mt={8}
         data={rooms}
         zIndex={300}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ flex: 1 }}
-        renderItem={({ item }) => <RoomCard maxH="16" mb="4" {...item} />}
+        renderItem={({ item }) => <RoomCard maxH="16" mb="2" {...item} />}
         ListEmptyComponent={() => (
           <Center h="full">
             <Placeholder
