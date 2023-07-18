@@ -21,7 +21,7 @@ export const SignIn = () => {
       showsVerticalScrollIndicator={false}
     >
       <Center flex={1} px="8">
-        <Image source={Logo} alt="Logotipo" w="250" h="180" />
+        <Image source={Logo} alt="Logotipo" w="250" resizeMode="contain" />
         <Text color="secondaryColor" fontFamily="heading" fontSize="md" mb="4">
           Acesse sua conta
         </Text>
