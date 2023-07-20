@@ -20,6 +20,10 @@ export const darkTheme = {
       middle: '#FDED00',
     },
 
+    green: {
+      light: '#39FC60',
+    },
+
     // gray: {
     //   700: '#F7F7F8',
     //   600: '#EDECEE',
