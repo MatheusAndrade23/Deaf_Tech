@@ -25,10 +25,20 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "onesignal-expo-plugin",
-      {
-        "mode": "development"
-      }
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "development"
+        }
+      ],
+      [
+        "@config-plugins/react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "modes": ["peripheral", "central"],
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices."
+        }
+      ]
     ]
   }
 }

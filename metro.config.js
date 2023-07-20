@@ -5,10 +5,10 @@ module.exports = (() => {
 
   const { transformer, resolver } = config;
 
-  // config.transformer = {
-  //   ...transformer,
-  //   babelTransformerPath: require.resolve("react-native-svg-transformer"),
-  // };
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  };
 
   config.resolver = {
     ...resolver,
