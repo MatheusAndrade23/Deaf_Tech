@@ -80,19 +80,15 @@ export const DeviceConfig = () => {
   });
 
   const scanForDevices = async () => {
-    try {
-      const isPermissionsEnabled = await requestPermissions();
+    const isPermissionsEnabled = await requestPermissions();
 
-      if (!isPermissionsEnabled) {
-        return;
-      }
-
-      scanForPeripherals();
-      setIsModalDeviceConnectionOpen(true);
-      setIsBLuetoothModalOpen(false);
-    } catch (error) {
-      console.log(error);
+    if (!isPermissionsEnabled) {
+      return;
     }
+
+    scanForPeripherals();
+    setIsModalDeviceConnectionOpen(true);
+    setIsBLuetoothModalOpen(false);
   };
 
   const handleSendNetworkInfoToDevice = async (data: FormDataProps) => {};
