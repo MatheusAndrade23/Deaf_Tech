@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#121214"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.deaftech.app"
@@ -42,7 +44,10 @@
         "@config-plugins/react-native-ble-plx",
         {
           "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
+          "modes": [
+            "peripheral",
+            "central"
+          ],
           "bluetoothAlwaysPermission": "Permitir que $(PRODUCT_NAME) conecte com outros dispositivos via Bluetooth."
         }
       ]
@@ -70,12 +75,21 @@
                       "group.com.deaftech.app.onesignal"
                     ]
                   }
+                },
+                {
+                  "targetName": "OneSignalNotificationServiceExtension",
+                  "bundleIdentifier": "com.deaftech.app.OneSignalNotificationServiceExtension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.deaftech.app.onesignal"
+                    ]
+                  }
                 }
               ]
             }
           }
         },
-        "projectId": "dc361a7d-1ea3-4f83-af85-fc608269c1b9"
+        "projectId": "99276c12-84e1-498f-bbda-ca27d92e3e42"
       }
     },
     "owner": "matheus_023"
