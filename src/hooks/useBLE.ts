@@ -19,12 +19,14 @@ interface BluetoothLowEnergyApi {
   connectedDevice: Device | null;
   allDevices: Device[];
   checkBluetoothStatus(): Promise<boolean>;
+  error: BleError | null;
 }
 
 function useBLE(): BluetoothLowEnergyApi {
   const bleManager = useMemo(() => new BleManager(), []);
   const [allDevices, setAllDevices] = useState<Device[]>([]);
   const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);
+  const [error, setError] = useState<BleError | null>(null);
 
   const checkBluetoothStatus = async (): Promise<boolean> => {
     try {
@@ -98,7 +100,7 @@ function useBLE(): BluetoothLowEnergyApi {
   const scanForPeripherals = async () =>
     bleManager.startDeviceScan(null, null, (error, device) => {
       if (error) {
-        return error;
+        setError(error);
       }
       if (device && device.name?.includes('CorSense')) {
         setAllDevices((prevState: Device[]) => {
@@ -111,14 +113,10 @@ function useBLE(): BluetoothLowEnergyApi {
     });
 
   const connectToDevice = async (device: Device) => {
-    try {
-      const deviceConnection = await bleManager.connectToDevice(device.id);
-      setConnectedDevice(deviceConnection);
-      await deviceConnection.discoverAllServicesAndCharacteristics();
-      bleManager.stopDeviceScan();
-    } catch (e) {
-      console.log('FAILED TO CONNECT', e);
-    }
+    const deviceConnection = await bleManager.connectToDevice(device.id);
+    setConnectedDevice(deviceConnection);
+    await deviceConnection.discoverAllServicesAndCharacteristics();
+    bleManager.stopDeviceScan();
   };
 
   const disconnectFromDevice = () => {
@@ -136,6 +134,7 @@ function useBLE(): BluetoothLowEnergyApi {
     connectedDevice,
     disconnectFromDevice,
     checkBluetoothStatus,
+    error,
   };
 }
 
