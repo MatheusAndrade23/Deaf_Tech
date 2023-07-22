@@ -52,7 +52,6 @@ export const Home = () => {
         flex={1}
         mt={8}
         data={rooms}
-        zIndex={300}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ flex: 1 }}
         renderItem={({ item }) => <RoomCard maxH="16" mb="2" {...item} />}
