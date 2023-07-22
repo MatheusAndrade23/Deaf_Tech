@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "deaftech",
-    "slug": "deaftech",
+    "name": "Deaftech",
+    "slug": "Deaftech",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,11 +9,9 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#121214"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.deaftech.app"
@@ -21,7 +19,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#121214"
       },
       "permissions": [
         "android.permission.BLUETOOTH",
@@ -44,11 +42,8 @@
         "@config-plugins/react-native-ble-plx",
         {
           "isBackgroundEnabled": true,
-          "modes": [
-            "peripheral",
-            "central"
-          ],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices."
+          "modes": ["peripheral", "central"],
+          "bluetoothAlwaysPermission": "Permitir que $(PRODUCT_NAME) conecte com outros dispositivos via Bluetooth."
         }
       ]
     ],
