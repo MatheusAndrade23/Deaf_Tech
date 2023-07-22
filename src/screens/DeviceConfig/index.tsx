@@ -16,8 +16,9 @@ import {
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 
-import { BluetoothStatusModal } from './components/BluetoothStatusModal';
 import { ErrorModal } from './components/ErrorModal';
+import { BluetoothStatusModal } from './components/BluetoothStatusModal';
+import { DeviceConnectionModal } from './components/DeviceConnectionModal';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -45,8 +46,10 @@ const networkIndoSchema = yup.object({
 });
 
 export const DeviceConfig = () => {
-  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isBLuetoothModalOpen, setIsBLuetoothModalOpen] = useState(true);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [isModalDeviceConnectionOpen, setIsModalDeviceConnectionOpen] =
+    useState(false);
   const [bluetoothStatus, setBluetoothStatus] = useState<
     'unknown' | 'on' | 'off'
   >('unknown');
@@ -54,11 +57,14 @@ export const DeviceConfig = () => {
 
   const { colors } = useTheme();
   const toast = useToast();
+
   const {
     requestPermissions,
     scanForPeripherals,
+    connectToDevice,
     allDevices,
     checkBluetoothStatus,
+    error,
   } = useBLE();
 
   const {
@@ -81,7 +87,9 @@ export const DeviceConfig = () => {
         return;
       }
 
-      // scanForPeripherals();
+      scanForPeripherals();
+      setIsModalDeviceConnectionOpen(true);
+      setIsBLuetoothModalOpen(false);
     } catch (error) {
       console.log(error);
     }
@@ -90,9 +98,31 @@ export const DeviceConfig = () => {
   const handleSendNetworkInfoToDevice = async (data: FormDataProps) => {};
 
   const handleTryConnectAgain = () => {
+    setIsBLuetoothModalOpen(true);
     setIsErrorModalVisible(false);
     scanForDevices();
   };
+
+  const hideDeviceConnectionModal = () => {
+    setIsModalDeviceConnectionOpen(false);
+  };
+
+  useEffect(() => {
+    if (error) {
+      setIsBLuetoothModalOpen(false);
+      setIsModalDeviceConnectionOpen(false);
+      setIsErrorModalVisible(true);
+      console.log(error);
+
+      const title = 'Erro ao conectar ao dispositivo';
+
+      toast.show({
+        title: error.message,
+        placement: 'top',
+        bgColor: 'red.500',
+      });
+    }
+  }, [error]);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -100,8 +130,8 @@ export const DeviceConfig = () => {
 
       if (isBluetoothEnabled) {
         setBluetoothStatus('on');
-        // clearInterval(interval);
-        // scanForDevices();
+        clearInterval(interval);
+        scanForDevices();
       } else {
         setBluetoothStatus('off');
       }
@@ -179,6 +209,12 @@ export const DeviceConfig = () => {
       <BluetoothStatusModal
         bluetoothStatus={bluetoothStatus}
         isModalOpen={isBLuetoothModalOpen}
+      />
+      <DeviceConnectionModal
+        isModalOpen={isModalDeviceConnectionOpen}
+        devices={allDevices}
+        connectToPeripheral={connectToDevice}
+        closeModal={hideDeviceConnectionModal}
       />
       <ErrorModal
         isErrorModalVisible={isErrorModalVisible}
