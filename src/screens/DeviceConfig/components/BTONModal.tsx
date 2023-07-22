@@ -1,6 +1,8 @@
-import { Center, Text, useTheme, Modal } from 'native-base';
+import { Center, Text, useTheme, Modal, HStack } from 'native-base';
 
 import { Bluetooth } from 'phosphor-react-native';
+
+import { Loading } from '@components/Loading';
 
 type Props = {
   isBTONModalVisible: boolean;
@@ -27,9 +29,12 @@ export const BTONModal = ({ isBTONModalVisible }: Props) => {
             <Text fontFamily="heading" color={colors.primaryColor}>
               Bluetooth ligado
             </Text>
-            <Text fontFamily="heading" mt="8" fontSize="md">
-              Conectando...
-            </Text>
+            <HStack alignItems="center" justifyContent="center" mt="8">
+              <Text fontFamily="heading" fontSize="lg" mr="4">
+                Conectando...
+              </Text>
+              <Loading size="lg" />
+            </HStack>
           </Center>
         </Modal.Body>
       </Modal.Content>
