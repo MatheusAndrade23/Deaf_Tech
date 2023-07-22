@@ -1,20 +1,36 @@
-import { useState } from 'react';
-import { ScrollView, Center, Image, Text, useTheme, Modal } from 'native-base';
+// -------------------------------------------------
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']);
+// ------------------------------------------------
+
+import { useEffect, useState } from 'react';
+import {
+  ScrollView,
+  Center,
+  Image,
+  Text,
+  useTheme,
+  useToast,
+} from 'native-base';
 
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 
+import { BTONModal } from './components/BTONModal';
+import { BTOFFModal } from './components/BTOFFModal';
+import { ErrorModal } from './components/ErrorModal';
+
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
+
+import useBLE from '@hooks/useBLE';
 
 import {
   ArrowRight,
   LockSimple,
   WifiHigh,
   Question,
-  BluetoothX,
-  Bluetooth,
 } from 'phosphor-react-native';
 
 import Logo from '@assets/logo.png';
@@ -30,11 +46,18 @@ const networkIndoSchema = yup.object({
 });
 
 export const DeviceConfig = () => {
-  const [isBTOFFModalVisible, setBTOFFModalVisible] = useState(false);
-  const [isBTONModalVisible, setBTONModalVisible] = useState(false);
+  const [isbluetoothON, setIsbluetoothON] = useState(false);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { colors } = useTheme();
+  const toast = useToast();
+  const {
+    requestPermissions,
+    scanForPeripherals,
+    allDevices,
+    checkBluetoothStatus,
+  } = useBLE();
 
   const {
     control,
@@ -48,9 +71,66 @@ export const DeviceConfig = () => {
     resolver: yupResolver(networkIndoSchema),
   });
 
-  const handleConnectDeviceToNetwork = async (data: FormDataProps) => {
-    console.log(data);
+  var isBTOFFModalVisible = false;
+  var isBTONModalVisible = false;
+
+  if (!isbluetoothON && !isErrorModalVisible) {
+    isBTONModalVisible = false;
+    isBTOFFModalVisible = true;
+  } else if (isbluetoothON && !isErrorModalVisible) {
+    isBTOFFModalVisible = false;
+    isBTONModalVisible = true;
+  }
+
+  const scanForDevices = async () => {
+    const isPermissionsEnabled = await requestPermissions();
+
+    if (!isPermissionsEnabled) {
+      return;
+    }
+
+    await scanForPeripherals();
+
+    // if (error) {
+    //   console.log(error);
+    //   const title = error.message;
+    //   setIsErrorModalVisible(true);
+    //   toast.show({
+    //     title,
+    //     placement: 'top',
+    //     bgColor: 'red.middle',
+    //   });
+    // }
+
+    // console.log(error);
+
+    // toast.show({
+    //   title: 'Deu certo',
+    //   placement: 'top',
+    //   bgColor: 'primaryColor',
+    // });
   };
+
+  const handleSendNetworkInfoToDevice = async (data: FormDataProps) => {};
+
+  const handleTryConnectAgain = () => {
+    setIsErrorModalVisible(false);
+    scanForDevices();
+  };
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const isBluetoothEnabled = await checkBluetoothStatus();
+      setIsbluetoothON(isBluetoothEnabled);
+
+      if (isBluetoothEnabled) {
+        clearInterval(interval);
+        scanForDevices();
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -107,7 +187,7 @@ export const DeviceConfig = () => {
             text="Conectar"
             mt="4"
             icon={<ArrowRight color={colors.secondaryColor} weight="bold" />}
-            onPress={handleSubmit(handleConnectDeviceToNetwork)}
+            onPress={handleSubmit(handleSendNetworkInfoToDevice)}
             isLoading={isLoading}
           />
           <Button
@@ -118,55 +198,12 @@ export const DeviceConfig = () => {
           />
         </Center>
       </ScrollView>
-      <Modal
-        isOpen={isBTOFFModalVisible}
-        bgColor="secondaryColor"
-        h="40%"
-        marginBottom={0}
-        marginTop="auto"
-        borderTopLeftRadius="8"
-        borderTopRightRadius="8"
-        size="xl"
-      >
-        <Modal.Content h="full" w="full">
-          <Modal.Body>
-            <Center>
-              <BluetoothX color={colors.red.middle} size={180} weight="thin" />
-              <Text fontFamily="heading" color={colors.red.middle}>
-                Bluetooth desligado
-              </Text>
-              <Text fontFamily="heading" mt="8" fontSize="md">
-                Por favor, ative o bluetooth do dispositivo
-              </Text>
-            </Center>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
-
-      <Modal
-        isOpen={isBTONModalVisible}
-        bgColor="secondaryColor"
-        h="40%"
-        marginBottom={0}
-        marginTop="auto"
-        borderTopLeftRadius="8"
-        borderTopRightRadius="8"
-        size="xl"
-      >
-        <Modal.Content h="full" w="full">
-          <Modal.Body>
-            <Center>
-              <Bluetooth color={colors.primaryColor} size={180} weight="thin" />
-              <Text fontFamily="heading" color={colors.primaryColor}>
-                Bluetooth ligado
-              </Text>
-              <Text fontFamily="heading" mt="8" fontSize="md">
-                Conectando...
-              </Text>
-            </Center>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
+      <BTOFFModal isBTOFFModalVisible={isBTOFFModalVisible} />
+      <BTONModal isBTONModalVisible={isBTONModalVisible} />
+      <ErrorModal
+        isErrorModalVisible={isErrorModalVisible}
+        connectToDevice={handleTryConnectAgain}
+      />
     </>
   );
 };
