@@ -19,6 +19,7 @@ type Props = {
   isModalOpen: boolean;
   connectToPeripheral: (device: Device) => void;
   closeModal: () => void;
+  errorFunction: (device: Device, error: unknown) => void;
 };
 
 export const DeviceConnectionModal = ({
@@ -26,6 +27,7 @@ export const DeviceConnectionModal = ({
   connectToPeripheral,
   closeModal,
   devices,
+  errorFunction,
 }: Props) => {
   const { colors } = useTheme();
 
@@ -56,9 +58,10 @@ export const DeviceConnectionModal = ({
             renderItem={({ item }) => (
               <DeviceModalListItem
                 mb="2"
-                item={item}
+                device={item}
                 connectToPeripheral={connectToPeripheral}
                 closeModal={closeModal}
+                errorFunction={errorFunction}
               />
             )}
             ListEmptyComponent={() => (

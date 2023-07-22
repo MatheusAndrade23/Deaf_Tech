@@ -1,38 +1,30 @@
 import { useCallback } from 'react';
-import { Button, IButtonProps, Text, useToast } from 'native-base';
+import { Button, IButtonProps, Text } from 'native-base';
 
-import { Device } from 'react-native-ble-plx';
+import { BleError, Device } from 'react-native-ble-plx';
 
 type DeviceModalListItemProps = IButtonProps & {
-  item: Device;
+  device: Device;
   connectToPeripheral: (device: Device) => void;
   closeModal: () => void;
+  errorFunction: (device: Device, error: unknown) => void;
 };
 
 export const DeviceModalListItem = ({
-  item,
+  device,
   connectToPeripheral,
   closeModal,
+  errorFunction,
   ...rest
 }: DeviceModalListItemProps) => {
-  const toast = useToast();
-
   const connectAndCloseModal = useCallback(() => {
     try {
-      connectToPeripheral(item);
+      connectToPeripheral(device);
       closeModal();
     } catch (error) {
-      const title = 'Erro ao conectar ao dispositivo';
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.500',
-      });
-
-      console.log(error);
+      errorFunction(device, error);
     }
-  }, [closeModal, connectToPeripheral, item]);
+  }, [closeModal, connectToPeripheral, device]);
 
   return (
     <Button
@@ -45,7 +37,7 @@ export const DeviceModalListItem = ({
       {...rest}
     >
       <Text color="secondaryColor" fontFamily="heading">
-        {item.name}
+        {device.name}
       </Text>
     </Button>
   );

@@ -25,6 +25,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 
 import useBLE from '@hooks/useBLE';
+import { Device, BleError } from 'react-native-ble-plx';
 
 import {
   ArrowRight,
@@ -79,6 +80,24 @@ export const DeviceConfig = () => {
     resolver: yupResolver(networkIndoSchema),
   });
 
+  const handleErrorOnConnectingToDevice = (device: Device, error: unknown) => {
+    setIsErrorModalVisible(true);
+    setIsModalDeviceConnectionOpen(false);
+    setIsBLuetoothModalOpen(false);
+
+    const isBleError = error instanceof BleError;
+
+    const title = isBleError
+      ? error.message
+      : 'Erro ao conectar com o dispositivo.';
+
+    toast.show({
+      title,
+      placement: 'top',
+      bgColor: 'red.middle',
+    });
+  };
+
   const scanForDevices = async () => {
     const isPermissionsEnabled = await requestPermissions();
 
@@ -110,12 +129,14 @@ export const DeviceConfig = () => {
       setIsErrorModalVisible(true);
       console.log(error);
 
-      const title = 'Erro ao conectar ao dispositivo';
+      const title = error.message
+        ? error.message
+        : 'Erro ao escanear dispositivos';
 
       toast.show({
-        title: error.message,
+        title,
         placement: 'top',
-        bgColor: 'red.500',
+        bgColor: 'red.middle',
       });
     }
   }, [error]);
@@ -145,7 +166,7 @@ export const DeviceConfig = () => {
             color="secondaryColor"
             fontFamily="heading"
             fontSize="md"
-            mb="4"
+            my="4"
           >
             Configuração inicial
           </Text>
@@ -205,6 +226,7 @@ export const DeviceConfig = () => {
         devices={allDevices}
         connectToPeripheral={connectToDevice}
         closeModal={hideDeviceConnectionModal}
+        errorFunction={handleErrorOnConnectingToDevice}
       />
       <ErrorModal
         isErrorModalVisible={isErrorModalVisible}
