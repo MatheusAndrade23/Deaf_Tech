@@ -102,7 +102,7 @@ function useBLE(): BluetoothLowEnergyApi {
       if (error) {
         setError(error);
       }
-      if (device && device.name?.includes('CorSense')) {
+      if (device) {
         setAllDevices((prevState: Device[]) => {
           if (!isDuplicteDevice(prevState, device)) {
             return [...prevState, device];
