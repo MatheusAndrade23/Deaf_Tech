@@ -7,8 +7,6 @@ import {
   Device,
 } from 'react-native-ble-plx';
 
-import { AppError } from '@utils/AppError';
-
 import * as ExpoDevice from 'expo-device';
 
 interface BluetoothLowEnergyApi {
@@ -102,7 +100,7 @@ function useBLE(): BluetoothLowEnergyApi {
       if (error) {
         setError(error);
       }
-      if (device) {
+      if (device && device.name) {
         setAllDevices((prevState: Device[]) => {
           if (!isDuplicteDevice(prevState, device)) {
             return [...prevState, device];
