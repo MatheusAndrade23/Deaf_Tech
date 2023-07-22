@@ -16,8 +16,7 @@ import {
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 
-import { BTONModal } from './components/BTONModal';
-import { BTOFFModal } from './components/BTOFFModal';
+import { BluetoothStatusModal } from './components/BluetoothStatusModal';
 import { ErrorModal } from './components/ErrorModal';
 
 import * as yup from 'yup';
@@ -46,8 +45,11 @@ const networkIndoSchema = yup.object({
 });
 
 export const DeviceConfig = () => {
-  const [isbluetoothON, setIsbluetoothON] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [isBLuetoothModalOpen, setIsBLuetoothModalOpen] = useState(true);
+  const [bluetoothStatus, setBluetoothStatus] = useState<
+    'unknown' | 'on' | 'off'
+  >('unknown');
   const [isLoading, setIsLoading] = useState(false);
 
   const { colors } = useTheme();
@@ -71,44 +73,18 @@ export const DeviceConfig = () => {
     resolver: yupResolver(networkIndoSchema),
   });
 
-  var isBTOFFModalVisible = false;
-  var isBTONModalVisible = false;
-
-  if (!isbluetoothON && !isErrorModalVisible) {
-    isBTONModalVisible = false;
-    isBTOFFModalVisible = true;
-  } else if (isbluetoothON && !isErrorModalVisible) {
-    isBTOFFModalVisible = false;
-    isBTONModalVisible = true;
-  }
-
   const scanForDevices = async () => {
-    const isPermissionsEnabled = await requestPermissions();
+    try {
+      const isPermissionsEnabled = await requestPermissions();
 
-    if (!isPermissionsEnabled) {
-      return;
+      if (!isPermissionsEnabled) {
+        return;
+      }
+
+      // scanForPeripherals();
+    } catch (error) {
+      console.log(error);
     }
-
-    await scanForPeripherals();
-
-    // if (error) {
-    //   console.log(error);
-    //   const title = error.message;
-    //   setIsErrorModalVisible(true);
-    //   toast.show({
-    //     title,
-    //     placement: 'top',
-    //     bgColor: 'red.middle',
-    //   });
-    // }
-
-    // console.log(error);
-
-    // toast.show({
-    //   title: 'Deu certo',
-    //   placement: 'top',
-    //   bgColor: 'primaryColor',
-    // });
   };
 
   const handleSendNetworkInfoToDevice = async (data: FormDataProps) => {};
@@ -121,11 +97,13 @@ export const DeviceConfig = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const isBluetoothEnabled = await checkBluetoothStatus();
-      setIsbluetoothON(isBluetoothEnabled);
 
       if (isBluetoothEnabled) {
-        clearInterval(interval);
-        scanForDevices();
+        setBluetoothStatus('on');
+        // clearInterval(interval);
+        // scanForDevices();
+      } else {
+        setBluetoothStatus('off');
       }
     }, 1000);
 
@@ -198,8 +176,10 @@ export const DeviceConfig = () => {
           />
         </Center>
       </ScrollView>
-      <BTOFFModal isBTOFFModalVisible={isBTOFFModalVisible} />
-      <BTONModal isBTONModalVisible={isBTONModalVisible} />
+      <BluetoothStatusModal
+        bluetoothStatus={bluetoothStatus}
+        isModalOpen={isBLuetoothModalOpen}
+      />
       <ErrorModal
         isErrorModalVisible={isErrorModalVisible}
         connectToDevice={handleTryConnectAgain}
