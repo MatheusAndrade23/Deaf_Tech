@@ -31,7 +31,7 @@ export const ErrorModal = ({ isErrorModalVisible, connectToDevice }: Props) => {
               weight="thin"
             />
             <Text fontFamily="heading" fontSize="lg" color={colors.red.middle}>
-              Erro ao tentar conectar
+              Erro ao procurar dispositivos
             </Text>
             <Button
               text="Tentar novamente"
