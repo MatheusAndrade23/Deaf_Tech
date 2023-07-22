@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Deaftech",
-    "slug": "Deaftech",
+    "slug": "deaftech",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -61,12 +61,21 @@
                       "group.com.deaftech.app.onesignal"
                     ]
                   }
+                },
+                {
+                  "targetName": "OneSignalNotificationServiceExtension",
+                  "bundleIdentifier": "com.deaftech.app.OneSignalNotificationServiceExtension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.deaftech.app.onesignal"
+                    ]
+                  }
                 }
               ]
             }
           }
         },
-        "projectId": "d15ce368-e949-4003-a6a9-a21ad59867da"
+        "projectId": "dc361a7d-1ea3-4f83-af85-fc608269c1b9"
       }
     },
     "owner": "matheus_023"
