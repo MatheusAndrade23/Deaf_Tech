@@ -140,13 +140,7 @@ export const DeviceConfig = () => {
     <>
       <ScrollView>
         <Center flex={1} px="8">
-          <Image
-            source={Logo}
-            alt="Logotipo"
-            w="250"
-            resizeMode="contain"
-            mt="20%"
-          />
+          <Image source={Logo} alt="Logotipo" mt="20%" maxWidth={200} />
           <Text
             color="secondaryColor"
             fontFamily="heading"

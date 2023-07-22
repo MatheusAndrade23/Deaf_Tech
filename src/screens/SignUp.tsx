@@ -21,8 +21,8 @@ export const SignUp = () => {
       showsVerticalScrollIndicator={false}
     >
       <Center flex={1} px="8">
-        <Image source={Logo} alt="Logotipo" w="200" resizeMode="contain" />
-        <Text color="secondaryColor" fontFamily="heading" fontSize="md" mb="4">
+        <Image source={Logo} alt="Logotipo" />
+        <Text color="secondaryColor" fontFamily="heading" fontSize="md" my="4">
           Crie uma conta
         </Text>
         <Input
