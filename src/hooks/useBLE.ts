@@ -20,7 +20,7 @@ interface BluetoothLowEnergyApi {
   error: BleError | null;
 }
 
-function useBLE(): BluetoothLowEnergyApi {
+export const useBLE = (): BluetoothLowEnergyApi => {
   const bleManager = useMemo(() => new BleManager(), []);
   const [allDevices, setAllDevices] = useState<Device[]>([]);
   const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);
@@ -134,6 +134,4 @@ function useBLE(): BluetoothLowEnergyApi {
     checkBluetoothStatus,
     error,
   };
-}
-
-export default useBLE;
+};

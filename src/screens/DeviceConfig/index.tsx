@@ -24,7 +24,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 
-import useBLE from '@hooks/useBLE';
+import { useBLE } from '@hooks/useBLE';
 import { Device, BleError } from 'react-native-ble-plx';
 
 import {
@@ -203,7 +203,7 @@ export const DeviceConfig = () => {
             )}
           />
           <Button
-            text="Conectar"
+            text="Conectar central"
             mt="4"
             icon={<ArrowRight color={colors.secondaryColor} weight="bold" />}
             onPress={handleSubmit(handleSendNetworkInfoToDevice)}

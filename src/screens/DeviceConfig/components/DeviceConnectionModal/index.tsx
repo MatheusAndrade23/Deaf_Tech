@@ -1,12 +1,4 @@
-import {
-  Center,
-  Text,
-  useTheme,
-  Modal,
-  VStack,
-  FlatList,
-  Box,
-} from 'native-base';
+import { Center, Text, useTheme, Modal, VStack, FlatList } from 'native-base';
 
 import { Device } from 'react-native-ble-plx';
 
@@ -43,13 +35,12 @@ export const DeviceConnectionModal = ({
     >
       <Modal.Content h="full" w="full">
         <VStack h="full" w="full" p="4">
-          <Center>
+          <Center mb="4">
             <Text fontFamily="heading" color="gray.primary" fontSize="md">
               Clique em um dispositivo para conectar
             </Text>
           </Center>
           <FlatList
-            mt={4}
             data={devices}
             keyExtractor={(item) => item.id}
             contentContainerStyle={{
@@ -65,7 +56,7 @@ export const DeviceConnectionModal = ({
               />
             )}
             ListEmptyComponent={() => (
-              <Center h="full">
+              <Center h="90%">
                 <Placeholder
                   color={colors.gray.quaternary}
                   size={90}
