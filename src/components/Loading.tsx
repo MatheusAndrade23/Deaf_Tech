@@ -1,7 +1,7 @@
 import { Center, Spinner, ICenterProps } from 'native-base';
 
 type LoadingProps = ICenterProps & {
-  size: 'sm' | 'lg';
+  size?: 'sm' | 'lg';
 };
 
 export const Loading = ({ size = 'lg', ...rest }: LoadingProps) => {
