@@ -65,6 +65,7 @@ export const DeviceConfig = () => {
     connectToDevice,
     allDevices,
     checkBluetoothStatus,
+    writeDataToCharacteristic,
     error,
   } = useBLE();
 
@@ -110,7 +111,33 @@ export const DeviceConfig = () => {
     setIsBLuetoothModalOpen(false);
   };
 
-  const handleSendNetworkInfoToDevice = async (data: FormDataProps) => {};
+  const handleSendNetworkInfoToDevice = async (networkInfo: FormDataProps) => {
+    const data = `["${networkInfo.name}", "${networkInfo.password}"]`;
+
+    try {
+      await writeDataToCharacteristic(data);
+
+      const title = 'Enviado com sucesso!';
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.middle',
+      });
+    } catch (error) {
+      const isBleError = error instanceof BleError;
+
+      const title = isBleError
+        ? error.message
+        : 'Erro ao conectar com o dispositivo.';
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.middle',
+      });
+    }
+  };
 
   const handleTryConnectAgain = () => {
     setIsBLuetoothModalOpen(true);

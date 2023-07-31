@@ -9,6 +9,9 @@ import {
 
 import * as ExpoDevice from 'expo-device';
 
+const SERVICE_UUID = '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
+const CHARACTERISTIC_UUID = 'beb5483e-36e1-4688-b7f5-ea07361b26a8';
+
 interface BluetoothLowEnergyApi {
   requestPermissions(): Promise<boolean>;
   scanForPeripherals(): void;
@@ -18,6 +21,7 @@ interface BluetoothLowEnergyApi {
   allDevices: Device[];
   checkBluetoothStatus(): Promise<boolean>;
   error: BleError | null;
+  writeDataToCharacteristic(data: string): Promise<void>;
 }
 
 export const useBLE = (): BluetoothLowEnergyApi => {
@@ -124,6 +128,16 @@ export const useBLE = (): BluetoothLowEnergyApi => {
     }
   };
 
+  const writeDataToCharacteristic = async (data: string) => {
+    if (connectedDevice) {
+      connectedDevice.writeCharacteristicWithoutResponseForService(
+        SERVICE_UUID,
+        CHARACTERISTIC_UUID,
+        data,
+      );
+    }
+  };
+
   return {
     scanForPeripherals,
     requestPermissions,
@@ -132,6 +146,7 @@ export const useBLE = (): BluetoothLowEnergyApi => {
     connectedDevice,
     disconnectFromDevice,
     checkBluetoothStatus,
+    writeDataToCharacteristic,
     error,
   };
 };
