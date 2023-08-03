@@ -25,7 +25,7 @@ export const CategoriesSelector = ({
   const { colors } = useTheme();
 
   return (
-    <HStack {...rest}>
+    <HStack {...rest} justifyContent="space-evenly">
       <IconButton
         onPress={() => selectCategory('Kitchen')}
         borderWidth={1}
@@ -37,7 +37,7 @@ export const CategoriesSelector = ({
                 ? colors.primaryColor
                 : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
@@ -50,7 +50,7 @@ export const CategoriesSelector = ({
             color={
               category === 'Room' ? colors.primaryColor : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
@@ -63,7 +63,7 @@ export const CategoriesSelector = ({
             color={
               category === 'Bell' ? colors.primaryColor : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
@@ -80,7 +80,7 @@ export const CategoriesSelector = ({
                 ? colors.primaryColor
                 : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
@@ -93,7 +93,7 @@ export const CategoriesSelector = ({
             color={
               category === 'Toilet' ? colors.primaryColor : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
@@ -110,7 +110,7 @@ export const CategoriesSelector = ({
                 ? colors.primaryColor
                 : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
@@ -123,7 +123,7 @@ export const CategoriesSelector = ({
             color={
               category === 'Garden' ? colors.primaryColor : colors.gray.tertiary
             }
-            size={30}
+            size={26}
           />
         }
       />
