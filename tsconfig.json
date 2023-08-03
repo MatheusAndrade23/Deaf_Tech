@@ -14,7 +14,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@routes/*": ["./src/routes/*"],
-      "@theme/*": ["./src/theme/*"]
+      "@theme/*": ["./src/theme/*"],
+      "@config/*": ["./src/config/*"]
     }
   },
   "typeRoots": ["./types"]
