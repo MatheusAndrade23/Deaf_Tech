@@ -1,4 +1,4 @@
-import { IconButton, HStack, useTheme } from 'native-base';
+import { IconButton, HStack, useTheme, IBoxProps } from 'native-base';
 
 import {
   ForkKnife,
@@ -12,16 +12,20 @@ import {
 
 import { Category } from '@dtos/ModuleDTO';
 
-type Props = {
+type Props = IBoxProps & {
   category: Category;
   selectCategory: (category: Category) => void;
 };
 
-export const CategoriesSelector = ({ selectCategory, category }: Props) => {
+export const CategoriesSelector = ({
+  selectCategory,
+  category,
+  ...rest
+}: Props) => {
   const { colors } = useTheme();
 
   return (
-    <HStack>
+    <HStack {...rest}>
       <IconButton
         onPress={() => selectCategory('Kitchen')}
         borderWidth={1}
