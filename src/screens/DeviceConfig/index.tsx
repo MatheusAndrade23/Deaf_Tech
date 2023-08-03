@@ -122,14 +122,14 @@ export const DeviceConfig = () => {
       toast.show({
         title,
         placement: 'top',
-        bgColor: 'red.middle',
+        bgColor: 'green.light',
       });
     } catch (error) {
       const isBleError = error instanceof BleError;
 
       const title = isBleError
         ? error.message
-        : 'Erro ao conectar com o dispositivo.';
+        : 'Erro ao enviar as informações para a central.';
 
       toast.show({
         title,
