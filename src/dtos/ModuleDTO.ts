@@ -4,6 +4,8 @@ export type ModuleDTO = {
   category: Category;
   batteryLevel: number;
   active: boolean;
+  type: ModuleType;
+  sensitivity: ModuleSensitivity;
 };
 
 export type Category =
@@ -14,3 +16,7 @@ export type Category =
   | 'Toilet'
   | 'LivingRoom'
   | 'Garden';
+
+export type ModuleType = 'Wired' | 'Wireless';
+
+export type ModuleSensitivity = 'High' | 'Medium' | 'Low';
