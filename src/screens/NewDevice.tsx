@@ -1,19 +1,44 @@
+import { LogBox } from 'react-native';
+import { useState } from 'react';
+
 import {
   ScrollView,
   HStack,
   Center,
   Text,
-  IconButton,
   useTheme,
   VStack,
 } from 'native-base';
 
 import { Input } from '@components/Input';
+import { Button } from '@components/Button';
+import { IconButton } from '@components/IconButton';
+import { ModuleTypeSelector } from '@components/ModuleTypeSelector';
+import { CategoriesSelector } from '@components/CategoriesSelector';
+import { ModuleSensitivitySelector } from '@components/ModuleSensitivitySelector';
 
-import { ArrowLeft, Plus, Pencil } from 'phosphor-react-native';
+import { ArrowLeft, Plus, Pencil, FloppyDisk, X } from 'phosphor-react-native';
+
+import { Category, ModuleType, ModuleSensitivity } from '@dtos/ModuleDTO';
 
 export const NewDevice = () => {
+  const [category, setCategory] = useState<Category>('Kitchen');
+  const [moduleType, setModuleType] = useState<ModuleType>('Wired');
+  const [moduleSensitivity, setModuleSensitivity] = useState<
+    ModuleSensitivity[]
+  >([]);
+
   const { colors } = useTheme();
+
+  const selectType = (type: ModuleType) => {
+    setModuleType(type);
+  };
+
+  const selectCategory = (category: Category) => {
+    setCategory(category);
+  };
+
+  console.log(moduleSensitivity);
 
   return (
     <ScrollView
@@ -49,7 +74,7 @@ export const NewDevice = () => {
           />
         </VStack>
 
-        <VStack mt="8" alignItems="flex-start">
+        <VStack mt="8">
           <Text fontFamily="heading" color="secondaryColor" fontSize="md">
             Cômodo:
           </Text>
@@ -61,12 +86,70 @@ export const NewDevice = () => {
           />
         </VStack>
 
-        <VStack mt="4" alignItems="flex-start">
+        <VStack mt="4">
           <Text fontFamily="heading" color="secondaryColor" fontSize="md">
             Categoria:
           </Text>
+
+          <CategoriesSelector
+            mt="4"
+            selectCategory={selectCategory}
+            category={category}
+          />
         </VStack>
+
+        <VStack mt="4">
+          <Text
+            fontFamily="heading"
+            color="secondaryColor"
+            fontSize="md"
+            mb="4"
+          >
+            Tipo:
+          </Text>
+
+          <ModuleTypeSelector
+            selectType={selectType}
+            selectedType={moduleType}
+            name="ModuleTypeRadioGroup"
+            defaultValue="Wired"
+          />
+        </VStack>
+
+        <VStack mt="4">
+          <Text
+            fontFamily="heading"
+            color="secondaryColor"
+            fontSize="md"
+            mb="4"
+          >
+            Sensibilidade:
+          </Text>
+
+          <ModuleSensitivitySelector
+            selectedSensitivity={moduleSensitivity}
+            selectSensitivity={setModuleSensitivity}
+          />
+        </VStack>
+      </VStack>
+
+      <VStack p="4">
+        <Button
+          text="Criar"
+          variant="secondary"
+          icon={<FloppyDisk color={colors.gray.tertiary} />}
+        />
+        <Button
+          text="Cancelar"
+          mt="2"
+          variant="tertiary"
+          icon={<X color={colors.secondaryColor} />}
+        />
       </VStack>
     </ScrollView>
   );
 };
+
+LogBox.ignoreLogs([
+  'We can not support a function callback. See Github Issues for details https://github.com/adobe/react-spectrum/issues/2320',
+]);
