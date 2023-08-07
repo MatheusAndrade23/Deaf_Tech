@@ -135,6 +135,8 @@ export const useBLE = (): BluetoothLowEnergyApi => {
         CHARACTERISTIC_UUID,
         data,
       );
+    } else {
+      throw new Error('');
     }
   };
 
