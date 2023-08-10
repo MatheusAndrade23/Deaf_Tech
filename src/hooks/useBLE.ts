@@ -7,6 +7,8 @@ import {
   Device,
 } from 'react-native-ble-plx';
 
+import base64 from 'react-native-base64';
+
 import * as ExpoDevice from 'expo-device';
 
 const SERVICE_UUID = '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
@@ -129,11 +131,12 @@ export const useBLE = (): BluetoothLowEnergyApi => {
   };
 
   const writeDataToCharacteristic = async (data: string) => {
+    const encodedData = base64.encode(data);
     if (connectedDevice) {
       connectedDevice.writeCharacteristicWithoutResponseForService(
         SERVICE_UUID,
         CHARACTERISTIC_UUID,
-        data,
+        encodedData,
       );
     } else {
       throw new Error('');
