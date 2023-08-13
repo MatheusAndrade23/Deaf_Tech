@@ -1,5 +1,6 @@
 import { ToastProvider } from 'native-base';
 import { ThemeProvider } from '@contexts/ThemeContext';
+import { AuthContextProvider } from '@contexts/AuthContext';
 
 import {
   useFonts,
@@ -15,7 +16,9 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <ToastProvider>{fontsLoaded ? <Routes /> : <Loading />}</ToastProvider>
+      <AuthContextProvider>
+        <ToastProvider>{fontsLoaded ? <Routes /> : <Loading />}</ToastProvider>
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

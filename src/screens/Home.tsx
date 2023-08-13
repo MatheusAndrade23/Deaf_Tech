@@ -8,6 +8,7 @@ import {
   useTheme,
   FlatList,
   useToast,
+  Box,
 } from 'native-base';
 
 import { Loading } from '@components/Loading';
@@ -16,6 +17,7 @@ import { IconButton } from '@components/IconButton';
 
 import { Plus, Placeholder } from 'phosphor-react-native';
 
+import { useAuth } from '@hooks/useAuth';
 import { ModuleDTO } from '@dtos/ModuleDTO';
 
 import { api } from '@services/api';
@@ -27,9 +29,11 @@ export const Home = () => {
 
   const toast = useToast();
 
+  const { user } = useAuth();
+
   const loadData = async () => {
     try {
-      const { data } = await api.get<ModuleDTO[]>('/api/devices');
+      const { data } = await api.get<ModuleDTO[]>(`/api/devices/${user.email}`);
       setDevices(data);
     } catch (error) {
       const isAppError = error instanceof AppError;
@@ -58,7 +62,7 @@ export const Home = () => {
 
   const { colors } = useTheme();
   return (
-    <VStack flex={1} p="4" mt="4">
+    <VStack flex={1} p="4" mt="4" position="relative">
       <HStack w="full" position="relative">
         <Center w="full">
           <Text fontFamily="heading" color="secondaryColor" fontSize="lg">

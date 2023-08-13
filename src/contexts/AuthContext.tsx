@@ -34,7 +34,11 @@ export const AuthContext = createContext<AuthContextDataProps>(
 );
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, setUser] = useState<UserDTO>({} as UserDTO);
+  // const [user, setUser] = useState<UserDTO>({} as UserDTO);
+  const [user, setUser] = useState<UserDTO>({
+    email: 'house1',
+    id: 'idsygfasd',
+  });
   const [token, setToken] = useState<string>('');
 
   const [isLoadingUserStorageData, setIsLoadingUserStorageData] =
@@ -60,20 +64,18 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   };
 
   const loadUserData = async () => {
-    try {
-      setIsLoadingUserStorageData(true);
-
-      const userLogged = await storageUserGet();
-      const token = await storageAuthTokenGet();
-
-      if (token && userLogged) {
-        userAndTokenUpdate(userLogged, token);
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsLoadingUserStorageData(false);
-    }
+    // try {
+    //   setIsLoadingUserStorageData(true);
+    //   const userLogged = await storageUserGet();
+    //   const token = await storageAuthTokenGet();
+    //   if (token && userLogged) {
+    //     userAndTokenUpdate(userLogged, token);
+    //   }
+    // } catch (error) {
+    //   throw error;
+    // } finally {
+    //   setIsLoadingUserStorageData(false);
+    // }
   };
 
   const signOut = async () => {
