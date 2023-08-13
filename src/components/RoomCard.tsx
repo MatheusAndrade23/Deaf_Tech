@@ -63,7 +63,7 @@ export const RoomCard = ({
         placement: 'top',
         bgColor: 'red.middle',
       });
-      setChecked(value);
+      setChecked(!value);
     } finally {
       setIsLoading(false);
     }
