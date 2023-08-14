@@ -16,6 +16,7 @@ import { Routes } from '@routes/index';
 import { Loading } from '@screens/Loading';
 
 OneSignal.setAppId(ONESIGNAL_APP_ID);
+// OneSignal.setEmail('house1@email.com');
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });

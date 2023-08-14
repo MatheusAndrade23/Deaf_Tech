@@ -22,7 +22,10 @@ type AppRoutes = {
 
 export const AppRoutes = () => {
   return (
-    <Navigator screenOptions={{ headerShown: false }} initialRouteName="app">
+    <Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="deviceConfig"
+    >
       <Screen name="newDevice" component={NewDevice} />
       <Screen name="app" component={SecondaryAppRoutes} />
       <Screen name="deviceConfig" component={DeviceConfig} />
