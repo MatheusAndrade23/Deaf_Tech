@@ -166,6 +166,7 @@ export const DeviceConfig = () => {
 
       if (data.connected) {
         navigateToHome();
+        setIsBLuetoothModalOpen(false);
       } else {
         const title = 'Algo deu errado! Por favor, tente novamente!';
 
@@ -214,6 +215,7 @@ export const DeviceConfig = () => {
 
         if (data.connected) {
           navigateToHome();
+          setIsBLuetoothModalOpen(false);
         } else {
           setIsLoading(false);
         }
