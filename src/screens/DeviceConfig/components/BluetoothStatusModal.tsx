@@ -1,11 +1,6 @@
 import { Center, Text, useTheme, Modal, HStack } from 'native-base';
 
-import {
-  Bluetooth,
-  BluetoothX,
-  Plus,
-  NavigationArrow,
-} from 'phosphor-react-native';
+import { Bluetooth, BluetoothX, Plus, MapPin } from 'phosphor-react-native';
 
 import { Loading } from '@components/Loading';
 
@@ -52,7 +47,7 @@ export const BluetoothStatusModal = ({
       {bluetoothStatus == 'off' && (
         <Modal.Content h="full" w="full">
           <Modal.Body>
-            <Center>
+            <Center mt="6">
               <HStack
                 alignItems="center"
                 w="full"
@@ -60,15 +55,11 @@ export const BluetoothStatusModal = ({
               >
                 <BluetoothX
                   color={colors.red.middle}
-                  size={150}
-                  weight="thin"
-                />
-                <Plus color={colors.gray.secondary} size={40} weight="bold" />
-                <NavigationArrow
-                  color={colors.red.middle}
                   size={120}
                   weight="thin"
                 />
+                <Plus color={colors.gray.secondary} size={40} weight="bold" />
+                <MapPin color={colors.red.middle} size={120} weight="thin" />
               </HStack>
 
               <Text fontFamily="heading" color={colors.red.middle}>
