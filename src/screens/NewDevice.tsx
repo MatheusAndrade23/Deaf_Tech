@@ -17,6 +17,9 @@ import { ModuleTypeSelector } from '@components/ModuleTypeSelector';
 import { CategoriesSelector } from '@components/CategoriesSelector';
 import { ModuleSensitivitySelector } from '@components/ModuleSensitivitySelector';
 
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
+import { useNavigation } from '@react-navigation/native';
+
 import { ArrowLeft, Plus, Pencil, FloppyDisk, X } from 'phosphor-react-native';
 
 import { Category, ModuleType, ModuleSensitivity } from '@dtos/ModuleDTO';
@@ -29,6 +32,7 @@ export const NewDevice = () => {
   >([]);
 
   const { colors } = useTheme();
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   const selectType = (type: ModuleType) => {
     setModuleType(type);
@@ -38,7 +42,9 @@ export const NewDevice = () => {
     setCategory(category);
   };
 
-  console.log(moduleSensitivity);
+  const handleGoBack = () => {
+    navigation.navigate('app', { screen: 'home' });
+  };
 
   return (
     <ScrollView
@@ -51,7 +57,9 @@ export const NewDevice = () => {
             left="0"
             position="absolute"
             icon={<ArrowLeft color={colors.secondaryColor} size={30} />}
+            zIndex={100}
             p={0}
+            onPress={handleGoBack}
           />
           <Center w="full">
             <Text fontFamily="heading" color="secondaryColor" fontSize="lg">
@@ -144,6 +152,7 @@ export const NewDevice = () => {
           mt="2"
           variant="tertiary"
           icon={<X color={colors.secondaryColor} />}
+          onPress={handleGoBack}
         />
       </VStack>
     </ScrollView>

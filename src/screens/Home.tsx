@@ -15,6 +15,9 @@ import { Loading } from '@components/Loading';
 import { RoomCard } from '@components/RoomCard';
 import { IconButton } from '@components/IconButton';
 
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
+import { useNavigation } from '@react-navigation/native';
+
 import { Plus, Placeholder } from 'phosphor-react-native';
 
 import { useAuth } from '@hooks/useAuth';
@@ -30,6 +33,12 @@ export const Home = () => {
   const toast = useToast();
 
   const { user } = useAuth();
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const gotToNewDeviceScreen = () => {
+    navigation.navigate('newDevice');
+  };
 
   const loadData = async () => {
     try {
@@ -73,6 +82,7 @@ export const Home = () => {
           right="0"
           position="absolute"
           icon={<Plus color={colors.secondaryColor} size={30} />}
+          onPress={gotToNewDeviceScreen}
         />
       </HStack>
       {isLoadingData ? (
