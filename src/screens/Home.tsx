@@ -31,8 +31,8 @@ export const Home = () => {
   const [devices, setDevices] = useState<ModuleDTO[]>([]);
 
   const toast = useToast();
-
   const { user } = useAuth();
+  const { colors } = useTheme();
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
@@ -69,7 +69,6 @@ export const Home = () => {
     }, []),
   );
 
-  const { colors } = useTheme();
   return (
     <VStack flex={1} p="4" mt="4" position="relative">
       <HStack w="full" position="relative">

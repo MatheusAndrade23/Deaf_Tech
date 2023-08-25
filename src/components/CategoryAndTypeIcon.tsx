@@ -8,22 +8,19 @@ import {
   Toilet,
   TelevisionSimple,
   Flower,
+  WifiHigh,
+  Plugs,
 } from 'phosphor-react-native';
 
+import { Category, ModuleType } from '@dtos/ModuleDTO';
+
 type Props = IBoxProps & {
-  category:
-    | 'Room'
-    | 'Kitchen'
-    | 'Bell'
-    | 'ExternalArea'
-    | 'Toilet'
-    | 'LivingRoom'
-    | 'Garden';
+  category: Category | ModuleType;
   color: string;
   border?: boolean;
 };
 
-export const CategoryIcon = ({
+export const CategoryAndTypeIcon = ({
   category,
   color,
   border = false,
@@ -56,6 +53,12 @@ export const CategoryIcon = ({
 
       case 'Garden':
         return <Flower size={30} color={color} />;
+
+      case 'Wired':
+        return <Plugs size={30} color={color} />;
+
+      case 'Wireless':
+        return <WifiHigh size={30} color={color} />;
     }
   };
 

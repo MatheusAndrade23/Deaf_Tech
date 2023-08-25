@@ -3,8 +3,9 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 
-import { DeviceConfig } from '@screens/DeviceConfig';
+import { Device } from '@screens/Device';
 import { NewDevice } from '@screens/NewDevice';
+import { DeviceConfig } from '@screens/DeviceConfig';
 
 import { SecondaryAppRoutes } from './secondaryApp.routes';
 
@@ -18,6 +19,9 @@ type AppRoutes = {
   app: {
     screen: 'help' | 'home' | 'settings';
   };
+  device: {
+    id: undefined | string;
+  };
 };
 
 export const AppRoutes = () => {
@@ -29,6 +33,7 @@ export const AppRoutes = () => {
       <Screen name="newDevice" component={NewDevice} />
       <Screen name="app" component={SecondaryAppRoutes} />
       <Screen name="deviceConfig" component={DeviceConfig} />
+      <Screen name="device" component={Device} />
     </Navigator>
   );
 };

@@ -12,10 +12,13 @@ import {
 } from 'native-base';
 
 import { Loading } from '@components/Loading';
-import { CategoryIcon } from '@components/CategoryIcon';
+import { CategoryAndTypeIcon } from '@components/CategoryAndTypeIcon';
 
 import { useAuth } from '@hooks/useAuth';
 import { ModuleDTO } from '@dtos/ModuleDTO';
+
+import { useNavigation } from '@react-navigation/native';
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
 
 import { api } from '@services/api';
 import { AppError } from '@utils/AppError';
@@ -36,6 +39,12 @@ export const RoomCard = ({
   const toast = useToast();
   const { user } = useAuth();
   const { colors } = useTheme();
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const handleGotToModule = () => {
+    navigation.navigate('device', { id });
+  };
 
   const handleChangeModuleState = (value: boolean) => {
     setIsLoading(true);
@@ -77,6 +86,7 @@ export const RoomCard = ({
       borderWidth={1}
       borderColor={batteryLevel < 25 ? 'red.middle' : 'gray.primary'}
       _pressed={{ bg: 'gray.tertiary' }}
+      onPress={handleGotToModule}
       {...rest}
     >
       <HStack
@@ -98,7 +108,7 @@ export const RoomCard = ({
             <Loading />
           </Center>
         )}
-        <CategoryIcon
+        <CategoryAndTypeIcon
           category={category}
           color={checked ? colors.secondaryColor : colors.gray.secondary}
           position="absolute"

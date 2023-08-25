@@ -6,6 +6,7 @@ export type ModuleDTO = {
   active: boolean;
   type: ModuleType;
   sensitivity: ModuleSensitivity;
+  image: string;
 };
 
 export type Category =
