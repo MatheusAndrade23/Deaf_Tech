@@ -5,7 +5,7 @@ import { NativeBaseProvider, extendTheme } from 'native-base';
 import { darkTheme, lightTheme, baseTheme } from '@theme/index';
 
 interface ThemeContextType {
-  changeTheme: () => void;
+  changeTheme: (theme: 'dark' | 'light') => void;
   themeMode: string;
 }
 
@@ -18,9 +18,8 @@ export const ThemeContext = createContext({} as ThemeContextType);
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [themeMode, setThemeMode] = useState('dark');
 
-  const changeTheme = () => {
-    const newTheme = themeMode === 'dark' ? 'light' : 'dark';
-    setThemeMode(newTheme);
+  const changeTheme = (theme: 'dark' | 'light') => {
+    setThemeMode(theme);
   };
 
   const DarkTheme = extendTheme({
