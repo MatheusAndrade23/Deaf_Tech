@@ -50,7 +50,7 @@ type FormDataProps = {
   password: string;
 };
 
-const networkIndoSchema = yup.object({
+const networkInfoSchema = yup.object({
   name: yup.string().required('Informe o nome da rede Wifi'),
   password: yup.string().required('Informe a senha da rede Wifi'),
 });
@@ -92,7 +92,7 @@ export const DeviceConfig = () => {
       name: '',
       password: '',
     },
-    resolver: yupResolver(networkIndoSchema),
+    resolver: yupResolver(networkInfoSchema),
   });
 
   const navigateToHome = () => {
