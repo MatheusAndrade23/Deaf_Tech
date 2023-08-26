@@ -1,12 +1,15 @@
 import { StatusBar } from 'react-native';
-import { useTheme, Box } from 'native-base';
+import { useTheme as useNativeTheme, Box } from 'native-base';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 import { AuthRoutes } from './auth.routes';
 import { AppRoutes } from './app.routes';
 
+import { useTheme } from '@hooks/useTheme';
+
 export const Routes = () => {
-  const { colors } = useTheme();
+  const { themeMode } = useTheme();
+  const { colors } = useNativeTheme();
 
   const theme = DefaultTheme;
   theme.colors.background = colors.bgColor;
@@ -14,7 +17,7 @@ export const Routes = () => {
   return (
     <>
       <StatusBar
-        barStyle="light-content"
+        barStyle={themeMode === 'light' ? 'dark-content' : 'light-content'}
         backgroundColor={colors.bgColor}
         translucent
       />
