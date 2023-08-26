@@ -3,7 +3,17 @@ import { useToast } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 
-export const useImage = () => {
+type ImageFile = {
+  name: string;
+  uri: string;
+  type: string;
+};
+
+interface IImage {
+  pickImage: () => Promise<ImageFile>;
+}
+
+export const useImage = (): IImage => {
   const toast = useToast();
   const pickImage = async () => {
     const photoSelected = await ImagePicker.launchImageLibraryAsync({
@@ -16,10 +26,6 @@ export const useImage = () => {
     if (photoSelected.canceled) {
       return;
     }
-
-    // if (images.length > 2) {
-    //   throw new AppError("Só pode selecionar 3 fotos!");
-    // }
 
     if (photoSelected.assets[0].uri) {
       const photoInfo = await FileSystem.getInfoAsync(
@@ -44,5 +50,9 @@ export const useImage = () => {
 
       return photoFile;
     }
+  };
+
+  return {
+    pickImage,
   };
 };

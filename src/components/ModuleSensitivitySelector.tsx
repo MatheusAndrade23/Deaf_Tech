@@ -1,18 +1,12 @@
-import {
-  Checkbox,
-  HStack,
-  useTheme,
-  Text,
-  ICheckboxGroupProps,
-} from 'native-base';
+import { Radio, HStack, useTheme, Text, IRadioGroupProps } from 'native-base';
 
 import { ModuleSensitivity } from '@dtos/ModuleDTO';
 
 import { SpeakerHigh, SpeakerLow, SpeakerNone } from 'phosphor-react-native';
 
-type Props = ICheckboxGroupProps & {
-  selectedSensitivity: ModuleSensitivity[];
-  selectSensitivity: (Sensitivity: ModuleSensitivity[]) => void;
+type Props = IRadioGroupProps & {
+  selectedSensitivity: ModuleSensitivity;
+  selectSensitivity: (Sensitivity: ModuleSensitivity) => void;
 };
 
 export const ModuleSensitivitySelector = ({
@@ -23,9 +17,7 @@ export const ModuleSensitivitySelector = ({
   const { colors } = useTheme();
 
   const elementsColor = (sensitivity: ModuleSensitivity) => {
-    const sensitivityIsSelected = selectedSensitivity.includes(sensitivity);
-
-    if (sensitivityIsSelected) {
+    if (sensitivity === selectedSensitivity) {
       return colors.primaryColor;
     } else {
       return colors.secondaryColor;
@@ -33,37 +25,38 @@ export const ModuleSensitivitySelector = ({
   };
 
   return (
-    <Checkbox.Group
-      onChange={(value) => selectSensitivity(value || [])}
+    <Radio.Group
+      defaultValue={selectedSensitivity}
+      onChange={(value) => selectSensitivity(value)}
       value={selectedSensitivity}
       {...rest}
     >
       <HStack>
         <SpeakerHigh color={elementsColor('High')} />
-        <Checkbox value="High" mx="1">
+        <Radio value="High" mx="1">
           <Text fontFamily="body" color={elementsColor('High')}>
-            Módulo com fio
+            Barulho alto
           </Text>
-        </Checkbox>
+        </Radio>
       </HStack>
 
-      <HStack>
+      <HStack mt="2">
         <SpeakerLow color={elementsColor('Medium')} />
-        <Checkbox value="Medium" mx="1">
+        <Radio value="Medium" mx="1">
           <Text fontFamily="body" color={elementsColor('Medium')}>
-            Módulo sem fio
+            Barulho médio
           </Text>
-        </Checkbox>
+        </Radio>
       </HStack>
 
-      <HStack>
+      <HStack mt="2">
         <SpeakerNone color={elementsColor('Low')} />
-        <Checkbox value="Low" mx="1">
+        <Radio value="Low" mx="1">
           <Text fontFamily="body" color={elementsColor('Low')}>
-            Módulo com fio
+            Barulho baixo
           </Text>
-        </Checkbox>
+        </Radio>
       </HStack>
-    </Checkbox.Group>
+    </Radio.Group>
   );
 };

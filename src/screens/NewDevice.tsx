@@ -8,14 +8,20 @@ import {
   Text,
   useTheme,
   VStack,
+  Image,
+  useToast,
+  Box,
 } from 'native-base';
 
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
+import { Loading } from '@components/Loading';
 import { IconButton } from '@components/IconButton';
 import { ModuleTypeSelector } from '@components/ModuleTypeSelector';
 import { CategoriesSelector } from '@components/CategoriesSelector';
 import { ModuleSensitivitySelector } from '@components/ModuleSensitivitySelector';
+
+import { useImage } from '@hooks/useImage';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { useNavigation } from '@react-navigation/native';
@@ -24,15 +30,45 @@ import { ArrowLeft, Plus, Pencil, FloppyDisk, X } from 'phosphor-react-native';
 
 import { Category, ModuleType, ModuleSensitivity } from '@dtos/ModuleDTO';
 
-export const NewDevice = () => {
-  const [category, setCategory] = useState<Category>('Kitchen');
-  const [moduleType, setModuleType] = useState<ModuleType>('Wired');
-  const [moduleSensitivity, setModuleSensitivity] = useState<
-    ModuleSensitivity[]
-  >([]);
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
 
+type FormDataProps = {
+  name: string;
+};
+
+const createDeviceSchema = yup.object({
+  name: yup.string().required('Informe o nome do dispositivo.'),
+});
+
+export const NewDevice = () => {
+  const [moduleType, setModuleType] = useState<ModuleType>('Wired');
+  const [category, setCategory] = useState<Category>('Kitchen');
+  const [loading, setLoading] = useState(false);
+  const [moduleSensitivity, setModuleSensitivity] =
+    useState<ModuleSensitivity>('High');
+  const [image, setImage] = useState<{
+    name: string;
+    type: string;
+    uri: string;
+  } | null>(null);
+
+  const toast = useToast();
   const { colors } = useTheme();
+  const { pickImage } = useImage();
   const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormDataProps>({
+    defaultValues: {
+      name: '',
+    },
+    resolver: yupResolver(createDeviceSchema),
+  });
 
   const selectType = (type: ModuleType) => {
     setModuleType(type);
@@ -46,11 +82,53 @@ export const NewDevice = () => {
     navigation.navigate('app', { screen: 'home' });
   };
 
+  const handleDeleteImage = () => {
+    setImage(null);
+  };
+
+  const handlePickImage = async () => {
+    setLoading(true);
+    const image = await pickImage();
+    setLoading(false);
+
+    if (image) {
+      setImage(image);
+
+      toast.show({
+        title: 'Foto selecionada!',
+        placement: 'top',
+        bgColor: 'green.light',
+      });
+    }
+  };
+
+  const handleCreateModule = () => {
+    if (!image) {
+      toast.show({
+        title: 'Selecione uma imagem!',
+        placement: 'top',
+        bgColor: 'red.light',
+      });
+      return;
+    }
+  };
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
     >
+      {loading && (
+        <Center
+          w="full"
+          h="full"
+          position="absolute"
+          zIndex={100}
+          bg="rgba(0,0,0,0.5)"
+        >
+          <Loading />
+        </Center>
+      )}
       <VStack flex={1} p="4" mt="4">
         <HStack w="full" position="relative" alignItems="center">
           <IconButton
@@ -72,25 +150,64 @@ export const NewDevice = () => {
           <Text fontFamily="heading" color="secondaryColor" fontSize="md">
             Imagem:
           </Text>
-
-          <IconButton
-            mt="4"
-            bg="gray.secondary"
-            p="10"
-            _pressed={{ bg: 'gray.tertiary' }}
-            icon={<Plus color={colors.secondaryColor} size={30} />}
-          />
+          <Center position="relative" mt="4" h="32" w="32">
+            {image ? (
+              <>
+                <Image
+                  source={{ uri: image.uri }}
+                  alt="Imagem do Dispositivo"
+                  height="full"
+                  width="full"
+                  resizeMode="contain"
+                />
+                <Box
+                  position="absolute"
+                  right={1}
+                  top={1}
+                  bg="rgba(0,0,0,0.5)"
+                  borderRadius="full"
+                >
+                  <IconButton
+                    p="0.5"
+                    onPress={handleDeleteImage}
+                    icon={<X color={colors.secondaryColor} />}
+                  />
+                </Box>
+              </>
+            ) : (
+              <IconButton
+                bg="gray.secondary"
+                p="10"
+                height="full"
+                width="full"
+                _pressed={{ bg: 'gray.tertiary' }}
+                icon={<Plus color={colors.secondaryColor} size={30} />}
+                onPress={handlePickImage}
+              />
+            )}
+          </Center>
         </VStack>
 
         <VStack mt="8">
           <Text fontFamily="heading" color="secondaryColor" fontSize="md">
-            Cômodo:
+            Nome:
           </Text>
 
-          <Input
-            mt="4"
-            placeholder="Cômodo"
-            icon={<Pencil color={colors.gray.tertiary} />}
+          <Controller
+            control={control}
+            name="name"
+            rules={{ required: 'Informe o nome do dispositivo:' }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                mt="4"
+                placeholder="Nome do dispositivo"
+                icon={<Pencil color={colors.gray.tertiary} />}
+                onChangeText={onChange}
+                errorMessage={errors.name?.message}
+                autoCapitalize="none"
+                value={value}
+              />
+            )}
           />
         </VStack>
 
@@ -135,6 +252,7 @@ export const NewDevice = () => {
           </Text>
 
           <ModuleSensitivitySelector
+            name="Seletor de Sensibilidade"
             selectedSensitivity={moduleSensitivity}
             selectSensitivity={setModuleSensitivity}
           />
@@ -146,6 +264,7 @@ export const NewDevice = () => {
           text="Criar"
           variant="secondary"
           icon={<FloppyDisk color={colors.gray.tertiary} />}
+          onPress={handleSubmit(handleCreateModule)}
         />
         <Button
           text="Cancelar"
