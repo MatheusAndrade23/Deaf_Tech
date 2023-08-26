@@ -17,12 +17,12 @@ export const BatteryLevelIndicator = ({
     if (batteryLevel > 80) {
       return {
         icon: <BatteryFull size={30} color={colors.green.light} />,
-        color: colors.yellow.light,
+        color: colors.green.light,
       };
     } else if (batteryLevel > 20) {
       return {
-        icon: <BatteryMedium size={30} color={colors.yellow.light} />,
-        color: colors.yellow.light,
+        icon: <BatteryMedium size={30} color={colors.yellow.middle} />,
+        color: colors.yellow.middle,
       };
     } else {
       return {
