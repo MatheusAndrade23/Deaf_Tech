@@ -36,7 +36,9 @@ import {
 import { api } from '@services/api';
 import { AppError } from '@utils/AppError';
 
-import { ModuleDTO, Category } from '@dtos/ModuleDTO';
+import { SpeakerHigh, SpeakerLow, SpeakerNone } from 'phosphor-react-native';
+
+import { ModuleDTO, Category, ModuleSensibility } from '@dtos/ModuleDTO';
 
 type RouteParams = {
   id: string;
@@ -64,6 +66,28 @@ export const Device = () => {
     navigation.navigate('editDevice', { id });
   };
 
+  const returnSensibilityIconAndText = (sensibility: ModuleSensibility) => {
+    switch (sensibility) {
+      case 'Low':
+        return {
+          icon: <SpeakerNone color={colors.primaryColor} size={25} />,
+          text: 'Barulho baixo',
+        };
+
+      case 'Medium':
+        return {
+          icon: <SpeakerLow color={colors.primaryColor} size={25} />,
+          text: 'Barulho médio',
+        };
+
+      case 'High':
+        return {
+          icon: <SpeakerHigh color={colors.primaryColor} size={25} />,
+          text: 'Barulho alto',
+        };
+    }
+  };
+
   const handleToggleModuleState = async () => {
     setToggleLoading(true);
     try {
@@ -76,6 +100,12 @@ export const Device = () => {
         ...prevState,
         active: !prevState.active,
       }));
+
+      toast.show({
+        title: 'Estado alterado com sucesso!',
+        placement: 'top',
+        bgColor: 'green.light',
+      });
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError
@@ -174,10 +204,10 @@ export const Device = () => {
                   textTransform="uppercase"
                   color="secondaryColor"
                   fontSize="lg"
-                  fontFamily="heading"
+                  fontFamily="body"
                   position="absolute"
                   zIndex={100}
-                  bg="bgColor"
+                  bg="red.middle"
                   p={1}
                   w={260}
                   textAlign="center"
@@ -277,11 +307,27 @@ export const Device = () => {
               </HStack>
             </VStack>
 
-            <HStack px="4" mt="12" justifyContent="space-between">
+            <HStack
+              px="4"
+              mt="12"
+              justifyContent="space-between"
+              alignItems="flex-start"
+            >
               <VStack>
                 <Text fontFamily="heading" color="secondaryColor" fontSize="md">
                   Sensibilidade:
                 </Text>
+                <HStack alignItems="center" mt="2">
+                  {returnSensibilityIconAndText(device.sensibility).icon}
+                  <Text
+                    fontFamily="body"
+                    color="primaryColor"
+                    textDecorationLine="underline"
+                    fontSize="md"
+                  >
+                    {returnSensibilityIconAndText(device.sensibility).text}
+                  </Text>
+                </HStack>
               </VStack>
               {device.type === 'Wireless' && (
                 <HStack alignItems="center">
@@ -304,7 +350,7 @@ export const Device = () => {
               )}
             </HStack>
 
-            <VStack p="4">
+            <VStack p="4" mt="8">
               <Button
                 text="Excluir"
                 variant="tertiary"
@@ -349,5 +395,3 @@ const returnDeviceCategory = (category: Category) => {
       return 'Banheiro';
   }
 };
-
-const returnSensibilityIcon = (sensibility: number) => {};
