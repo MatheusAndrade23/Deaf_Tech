@@ -15,7 +15,9 @@ const { Navigator, Screen } = createNativeStackNavigator<AppRoutes>();
 export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;
 
 type AppRoutes = {
-  deviceConfig: undefined;
+  deviceConfig: {
+    reConfig: true | undefined;
+  };
   newDevice: undefined;
   app: {
     screen: 'help' | 'home' | 'settings';

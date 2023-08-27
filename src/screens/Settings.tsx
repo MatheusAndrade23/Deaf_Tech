@@ -24,6 +24,7 @@ import {
   Gear,
   Image,
   Repeat,
+  Bell,
 } from 'phosphor-react-native';
 import { useTheme } from '@hooks/useTheme';
 
@@ -41,6 +42,10 @@ export const Settings = () => {
 
   const handleGoBack = () => {
     navigation.navigate('app', { screen: 'home' });
+  };
+
+  const handleGoToCentralConfig = () => {
+    navigation.navigate('deviceConfig', { reConfig: true });
   };
 
   const handleToggleConfig = (configName: keyof typeof config) => {
@@ -102,6 +107,7 @@ export const Settings = () => {
             text="Reconectar Central"
             mt="2"
             variant="secondary"
+            onPress={handleGoToCentralConfig}
             icon={<Gear color={colors.gray.tertiary} />}
           />
 
@@ -169,17 +175,20 @@ export const Settings = () => {
                 offTrackColor="gray.secondary"
                 onTrackColor="primaryColor"
                 offThumbColor="secondaryColor"
-                isChecked={config.showImage}
-                onToggle={() => handleToggleConfig('showImage')}
+                isChecked={config.showNotifications}
+                onToggle={() => handleToggleConfig('showNotifications')}
               />
-              <Image color={notificationElementsColor('showImage')} size={30} />
+              <Bell
+                color={notificationElementsColor('showNotifications')}
+                size={30}
+              />
               <Text
                 mx="2"
                 fontFamily="body"
-                color={notificationElementsColor('showImage')}
+                color={notificationElementsColor('showNotifications')}
                 fontSize="md"
               >
-                Mostrar Imagem
+                Mostrar Notificações
               </Text>
             </HStack>
             <HStack alignItems="center">
@@ -205,6 +214,28 @@ export const Settings = () => {
                 fontSize="md"
               >
                 Repetir Notificações
+              </Text>
+            </HStack>
+            <HStack alignItems="center">
+              <Switch
+                p={0}
+                m={0}
+                mr="2"
+                size="lg"
+                offTrackColor="gray.secondary"
+                onTrackColor="primaryColor"
+                offThumbColor="secondaryColor"
+                isChecked={config.showImage}
+                onToggle={() => handleToggleConfig('showImage')}
+              />
+              <Image color={notificationElementsColor('showImage')} size={30} />
+              <Text
+                mx="2"
+                fontFamily="body"
+                color={notificationElementsColor('showImage')}
+                fontSize="md"
+              >
+                Mostrar Imagem
               </Text>
             </HStack>
           </VStack>

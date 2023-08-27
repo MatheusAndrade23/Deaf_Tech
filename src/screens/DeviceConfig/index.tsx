@@ -22,7 +22,7 @@ import { BluetoothStatusModal } from './components/BluetoothStatusModal';
 import { DeviceConnectionModal } from './components/DeviceConnectionModal';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -44,6 +44,10 @@ import {
 } from 'phosphor-react-native';
 
 import Logo from '@assets/logo.png';
+
+type RouteParams = {
+  reConfig: true | undefined;
+};
 
 type FormDataProps = {
   name: string;
@@ -70,6 +74,9 @@ export const DeviceConfig = () => {
   const toast = useToast();
   const { user } = useAuth();
   const { colors } = useTheme();
+
+  const route = useRoute();
+  const params = route.params as RouteParams;
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
@@ -244,7 +251,12 @@ export const DeviceConfig = () => {
       }
     };
 
-    checkDeviceConnection();
+    if (!params?.reConfig) {
+      checkDeviceConnection();
+    } else {
+      setIsLoading(false);
+      setIsBLuetoothModalOpen(true);
+    }
 
     const interval = setInterval(async () => {
       const isBluetoothEnabled = await checkBluetoothStatus();
@@ -259,7 +271,7 @@ export const DeviceConfig = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     if (error) {
