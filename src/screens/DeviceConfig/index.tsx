@@ -130,10 +130,14 @@ export const DeviceConfig = () => {
   };
 
   const handleSendNetworkInfoToDevice = async (networkInfo: FormDataProps) => {
-    const data = `["${networkInfo.name}", "${networkInfo.password}"]`;
+    setIsButtonLoading(true);
+    const networkName = networkInfo.name;
+    const networkPassword = networkInfo.password;
+    // const data = `["${networkInfo.name}", "${networkInfo.password}"]`;
 
     try {
-      await writeDataToCharacteristic(data);
+      await writeDataToCharacteristic(networkName);
+      await writeDataToCharacteristic(networkPassword);
 
       const title = 'Enviado com sucesso!';
 
@@ -143,7 +147,11 @@ export const DeviceConfig = () => {
         bgColor: 'green.light',
       });
 
-      checkIfDeviceConnectedToNetwork();
+      const interval = setInterval(() => {
+        checkIfDeviceConnectedToNetwork();
+      }, 5000);
+
+      clearInterval(interval);
     } catch (error) {
       const isBleError = error instanceof BleError;
 
@@ -161,7 +169,6 @@ export const DeviceConfig = () => {
 
   const checkIfDeviceConnectedToNetwork = async () => {
     try {
-      setIsButtonLoading(true);
       const { data } = await api.get(`/api/connection/${user.email}`);
 
       if (data.connected) {
