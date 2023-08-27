@@ -214,7 +214,7 @@ export const EditDevice = () => {
               <Loading />
             </Center>
           )}
-          <VStack flex={1} p="4" mt="4">
+          <VStack flex={1} p="4" mt="8">
             <HStack w="full" position="relative" alignItems="center">
               <IconButton
                 left="0"

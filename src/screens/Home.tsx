@@ -71,7 +71,7 @@ export const Home = () => {
   );
 
   return (
-    <VStack flex={1} p="4" mt="4" position="relative">
+    <VStack flex={1} p="4" mt="8" position="relative">
       <HStack w="full" position="relative">
         <Center w="full">
           <Text fontFamily="heading" color="secondaryColor" fontSize="lg">

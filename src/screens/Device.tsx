@@ -174,7 +174,7 @@ export const Device = () => {
               <Loading />
             </Center>
           )}
-          <VStack flex={1} mt="4" py="4">
+          <VStack flex={1} mt="8" py="4">
             <HStack
               w="full"
               alignItems="center"
