@@ -28,7 +28,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { ArrowLeft, Plus, Pencil, FloppyDisk, X } from 'phosphor-react-native';
 
-import { Category, ModuleType, ModuleSensitivity } from '@dtos/ModuleDTO';
+import { Category, ModuleType, ModuleSensibility } from '@dtos/ModuleDTO';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -47,7 +47,7 @@ export const NewDevice = () => {
   const [category, setCategory] = useState<Category>('Kitchen');
   const [loading, setLoading] = useState(false);
   const [moduleSensitivity, setModuleSensitivity] =
-    useState<ModuleSensitivity>('High');
+    useState<ModuleSensibility>('High');
   const [image, setImage] = useState<{
     name: string;
     type: string;
@@ -141,7 +141,7 @@ export const NewDevice = () => {
           />
           <Center w="full">
             <Text fontFamily="heading" color="secondaryColor" fontSize="lg">
-              Novo Módulo
+              Novo Dispositivo
             </Text>
           </Center>
         </HStack>

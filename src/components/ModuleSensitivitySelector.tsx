@@ -1,12 +1,12 @@
 import { Radio, HStack, useTheme, Text, IRadioGroupProps } from 'native-base';
 
-import { ModuleSensitivity } from '@dtos/ModuleDTO';
+import { ModuleSensibility } from '@dtos/ModuleDTO';
 
 import { SpeakerHigh, SpeakerLow, SpeakerNone } from 'phosphor-react-native';
 
 type Props = IRadioGroupProps & {
-  selectedSensitivity: ModuleSensitivity;
-  selectSensitivity: (Sensitivity: ModuleSensitivity) => void;
+  selectedSensitivity: ModuleSensibility;
+  selectSensitivity: (Sensitivity: ModuleSensibility) => void;
 };
 
 export const ModuleSensitivitySelector = ({
@@ -16,7 +16,7 @@ export const ModuleSensitivitySelector = ({
 }: Props) => {
   const { colors } = useTheme();
 
-  const elementsColor = (sensitivity: ModuleSensitivity) => {
+  const elementsColor = (sensitivity: ModuleSensibility) => {
     if (sensitivity === selectedSensitivity) {
       return colors.primaryColor;
     } else {

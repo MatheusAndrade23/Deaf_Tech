@@ -5,7 +5,7 @@ export type ModuleDTO = {
   batteryLevel: number;
   active: boolean;
   type: ModuleType;
-  sensitivity: ModuleSensitivity;
+  sensibility: ModuleSensibility;
   image: string;
 };
 
@@ -20,4 +20,4 @@ export type Category =
 
 export type ModuleType = 'Wired' | 'Wireless';
 
-export type ModuleSensitivity = 'High' | 'Medium' | 'Low';
+export type ModuleSensibility = 'High' | 'Medium' | 'Low';

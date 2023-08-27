@@ -60,6 +60,10 @@ export const Device = () => {
     navigation.navigate('app', { screen: 'home' });
   };
 
+  const handleEditDevice = () => {
+    navigation.navigate('editDevice', { id });
+  };
+
   const handleToggleModuleState = async () => {
     setToggleLoading(true);
     try {
@@ -89,6 +93,7 @@ export const Device = () => {
   };
 
   const loadData = async () => {
+    setLoading(true);
     try {
       const { data } = await api.get(`/api/device/${user.email}/${id}`);
       setDevice(data);
@@ -96,7 +101,7 @@ export const Device = () => {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
-        : 'Não foi possível receber os dispositivos. Tente Novamente!';
+        : 'Não foi possível receber o dispositivo. Tente Novamente!';
 
       if (isAppError) {
         toast.show({
@@ -105,6 +110,7 @@ export const Device = () => {
           bgColor: 'red.middle',
         });
       }
+      setDevice({} as ModuleDTO);
     } finally {
       setLoading(false);
     }
@@ -153,6 +159,7 @@ export const Device = () => {
                 icon={
                   <PencilSimpleLine color={colors.secondaryColor} size={30} />
                 }
+                onPress={handleEditDevice}
               />
             </HStack>
 

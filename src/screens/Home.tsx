@@ -41,6 +41,7 @@ export const Home = () => {
   };
 
   const loadData = async () => {
+    setIsLoadingData(true);
     try {
       const { data } = await api.get<ModuleDTO[]>(`/api/devices/${user.email}`);
       setDevices(data);
