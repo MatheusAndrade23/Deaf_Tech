@@ -42,8 +42,10 @@ type ConfigType = {
 };
 
 export const Settings = () => {
-  const [loadingData, setLoadingData] = useState(true);
   const [loadingConfig, setLoadingConfig] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
+  const [reconfigureCentralLoading, setReconfigureCentralLoading] =
+    useState(false);
   const [config, setConfig] = useState({} as ConfigType);
 
   const { themeMode, changeTheme } = useTheme();
@@ -58,8 +60,28 @@ export const Settings = () => {
     navigation.navigate('app', { screen: 'home' });
   };
 
-  const handleGoToCentralConfig = () => {
-    navigation.navigate('deviceConfig', { reConfig: true });
+  const handleGoToCentralConfig = async () => {
+    setReconfigureCentralLoading(true);
+    try {
+      await api.patch(`/api/reconnection`, {
+        email: user.email,
+      });
+
+      navigation.navigate('deviceConfig', { reConfig: true });
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : 'Algo deu errado. Tente Novamente!';
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.middle',
+      });
+    } finally {
+      setReconfigureCentralLoading(false);
+    }
   };
 
   const handleToggleConfig = async (
@@ -211,6 +233,7 @@ export const Settings = () => {
                 mt="2"
                 variant="secondary"
                 onPress={handleGoToCentralConfig}
+                isLoading={reconfigureCentralLoading}
                 icon={<Gear color={colors.gray.tertiary} />}
               />
 
