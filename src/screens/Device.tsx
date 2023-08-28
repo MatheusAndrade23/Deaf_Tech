@@ -63,7 +63,16 @@ export const Device = () => {
   };
 
   const handleEditDevice = () => {
-    navigation.navigate('editDevice', { id });
+    if (id != 'doorbell') {
+      navigation.navigate('editDevice', { id });
+    } else {
+      const title = 'Não é possível editar a campainha!';
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.middle',
+      });
+    }
   };
 
   const returnSensibilityIconAndText = (sensibility: ModuleSensibility) => {
@@ -306,49 +315,55 @@ export const Device = () => {
                 </VStack>
               </HStack>
             </VStack>
-
-            <HStack
-              px="4"
-              mt="12"
-              justifyContent="space-between"
-              alignItems="flex-start"
-            >
-              <VStack>
-                <Text fontFamily="heading" color="secondaryColor" fontSize="md">
-                  Sensibilidade:
-                </Text>
-                <HStack alignItems="center" mt="2">
-                  {returnSensibilityIconAndText(device.sensibility).icon}
-                  <Text
-                    fontFamily="body"
-                    color="primaryColor"
-                    textDecorationLine="underline"
-                    fontSize="md"
-                  >
-                    {returnSensibilityIconAndText(device.sensibility).text}
-                  </Text>
-                </HStack>
-              </VStack>
-              {device.type === 'Wireless' && (
-                <HStack alignItems="center">
+            {id != 'doorbell' && (
+              <HStack
+                px="4"
+                mt="12"
+                justifyContent="space-between"
+                alignItems="flex-start"
+              >
+                <VStack>
                   <Text
                     fontFamily="heading"
                     color="secondaryColor"
                     fontSize="md"
                   >
-                    Bateria:{' '}
+                    Sensibilidade:
                   </Text>
-                  <Text
-                    fontFamily="body"
-                    color="primaryColor"
-                    textDecorationLine="underline"
-                    fontSize="md"
-                  >
-                    {device.batteryLevel}%
-                  </Text>
-                </HStack>
-              )}
-            </HStack>
+                  <HStack alignItems="center" mt="2">
+                    <Text
+                      fontFamily="body"
+                      color="primaryColor"
+                      textDecorationLine="underline"
+                      fontSize="md"
+                      mr="2"
+                    >
+                      {returnSensibilityIconAndText(device.sensibility).text}
+                    </Text>
+                    {returnSensibilityIconAndText(device.sensibility).icon}
+                  </HStack>
+                </VStack>
+                {device.type === 'Wireless' && (
+                  <HStack alignItems="center">
+                    <Text
+                      fontFamily="heading"
+                      color="secondaryColor"
+                      fontSize="md"
+                    >
+                      Bateria:{' '}
+                    </Text>
+                    <Text
+                      fontFamily="body"
+                      color="primaryColor"
+                      textDecorationLine="underline"
+                      fontSize="md"
+                    >
+                      {device.batteryLevel}%
+                    </Text>
+                  </HStack>
+                )}
+              </HStack>
+            )}
 
             <VStack p="4" mt="8">
               <Button
