@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { useTheme } from 'native-base';
+import { useTheme, Image } from 'native-base';
 import {
   createBottomTabNavigator,
   BottomTabNavigationProp,
@@ -10,6 +10,8 @@ import { House, GearSix, Question } from 'phosphor-react-native';
 import { Home } from '@screens/Home';
 import { Settings } from '@screens/Settings';
 import { Help } from '@screens/Help';
+
+import LibrasLogo from '@assets/libras.svg';
 
 type SecondaryAppRoutes = {
   home: undefined;
@@ -69,7 +71,8 @@ export const SecondaryAppRoutes = () => {
         component={Help}
         options={{
           tabBarIcon: ({ color }) => (
-            <Question size={iconSize} color={color} weight="bold" />
+            <LibrasLogo fill={color} width={60} height={60} />
+            // <Question size={iconSize} color={color} weight="bold" />
           ),
         }}
       />
