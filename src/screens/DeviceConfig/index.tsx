@@ -41,6 +41,8 @@ import {
   LockSimple,
   WifiHigh,
   Question,
+  Eye,
+  EyeSlash,
 } from 'phosphor-react-native';
 
 import Logo from '@assets/logo.png';
@@ -62,6 +64,7 @@ const networkInfoSchema = yup.object({
 export const DeviceConfig = () => {
   const [isBLuetoothModalOpen, setIsBLuetoothModalOpen] = useState(true);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
   const [isModalDeviceConnectionOpen, setIsModalDeviceConnectionOpen] =
     useState(false);
   const [bluetoothStatus, setBluetoothStatus] = useState<
@@ -69,7 +72,7 @@ export const DeviceConfig = () => {
   >('unknown');
 
   const [isButtonLoading, setIsButtonLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toast = useToast();
   const { user } = useAuth();
@@ -154,11 +157,9 @@ export const DeviceConfig = () => {
         bgColor: 'green.light',
       });
 
-      const interval = setInterval(() => {
+      setTimeout(() => {
         checkIfDeviceConnectedToNetwork();
       }, 5000);
-
-      clearInterval(interval);
     } catch (error) {
       const isBleError = error instanceof BleError;
 
@@ -335,7 +336,7 @@ export const DeviceConfig = () => {
                   <Input
                     title="Senha da rede Wifi:"
                     placeholder="Digite a senha do Wifi"
-                    secureTextEntry
+                    secureTextEntry={hidePassword}
                     icon={<LockSimple color={colors.gray.tertiary} />}
                     onChangeText={onChange}
                     value={value}
@@ -344,13 +345,17 @@ export const DeviceConfig = () => {
                 )}
               />
               <Button
-                text="Conectar central"
+                text={hidePassword ? 'Mostrar senha' : 'Esconder senha'}
                 mt="4"
                 icon={
-                  <ArrowRight color={colors.secondaryColor} weight="bold" />
+                  hidePassword ? (
+                    <Eye color={colors.secondaryColor} weight="bold" />
+                  ) : (
+                    <EyeSlash color={colors.secondaryColor} weight="bold" />
+                  )
                 }
-                onPress={handleSubmit(handleSendNetworkInfoToDevice)}
-                isLoading={isButtonLoading}
+                variant={'tertiary'}
+                onPress={() => setHidePassword((prevState) => !prevState)}
               />
               <Button
                 text="Ajuda"
@@ -358,9 +363,18 @@ export const DeviceConfig = () => {
                 variant="secondary"
                 icon={<Question color={colors.gray.tertiary} weight="bold" />}
               />
+              <Button
+                text="Conectar central"
+                mt="16"
+                icon={
+                  <ArrowRight color={colors.secondaryColor} weight="bold" />
+                }
+                onPress={handleSubmit(handleSendNetworkInfoToDevice)}
+                isLoading={isButtonLoading}
+              />
             </Center>
           </ScrollView>
-          <BluetoothStatusModal
+          {/* <BluetoothStatusModal
             bluetoothStatus={bluetoothStatus}
             isModalOpen={isBLuetoothModalOpen}
           />
@@ -374,7 +388,7 @@ export const DeviceConfig = () => {
           <ErrorModal
             isErrorModalVisible={isErrorModalVisible}
             connectToDevice={handleTryConnectAgain}
-          />
+          /> */}
         </>
       )}
     </>
