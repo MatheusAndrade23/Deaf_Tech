@@ -39,6 +39,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 
+import { ImageFile } from '@hooks/useImage';
+
 import { api } from '@services/api';
 import { AppError } from '@utils/AppError';
 
@@ -57,6 +59,7 @@ const createDeviceSchema = yup.object({
 export const EditDevice = () => {
   const [device, setDevice] = useState<ModuleDTO>({} as ModuleDTO);
   const [dataLoading, setDataLoading] = useState(true);
+  const [image, setImage] = useState<ImageFile>({} as ImageFile);
   const [loading, setLoading] = useState(false);
 
   const toast = useToast();
@@ -101,6 +104,7 @@ export const EditDevice = () => {
     setLoading(false);
 
     if (image) {
+      setImage(image);
       setDevice((prevDevice) => ({ ...prevDevice, image: image.uri }));
 
       toast.show({
@@ -111,8 +115,7 @@ export const EditDevice = () => {
     }
   };
 
-  const handleEditModule = async (formData: FormDataProps) => {
-    setLoading(true);
+  const handleEditModule = async (data: FormDataProps) => {
     if (device.image.length === 0) {
       toast.show({
         title: 'Selecione uma imagem!',
@@ -121,21 +124,28 @@ export const EditDevice = () => {
       });
       return;
     }
+    setLoading(true);
+    const formData = new FormData();
 
-    const imageData = new FormData();
-
-    const imageFile = {
-      uri: device.image,
-    } as any;
-
-    imageData.append('image', imageFile);
+    // formData.append('file', image);
 
     try {
+      // await fetch('https://api.imgur.com/3/image/upload', {
+      //   method: 'POST',
+      //   body: formData,
+      //   headers: {
+      //     Authorization: 'Client-ID ' + '30e6eee600a4855',
+      //     Accept: 'application/json',
+      //   },
+      // })
+      //   .then((res) => console.log(res)) // Handling success
+      //   .catch((err) => console.log(err)); // Handling error
+
       await api.patch(`/api/device/edit/`, {
         email: user.email,
         deviceId: id,
-        device: { ...device, name: formData.name },
-        image: imageData,
+        device: { ...device, name: data.name },
+        image: formData,
       });
 
       toast.show({

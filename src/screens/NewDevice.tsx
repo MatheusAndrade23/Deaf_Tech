@@ -13,6 +13,8 @@ import {
   Box,
 } from 'native-base';
 
+import uuid from 'react-native-uuid';
+
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Loading } from '@components/Loading';
@@ -22,6 +24,7 @@ import { CategoriesSelector } from '@components/CategoriesSelector';
 import { ModuleSensitivitySelector } from '@components/ModuleSensitivitySelector';
 
 import { useImage } from '@hooks/useImage';
+import { useAuth } from '@hooks/useAuth';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { useNavigation } from '@react-navigation/native';
@@ -33,6 +36,9 @@ import { Category, ModuleType, ModuleSensibility } from '@dtos/ModuleDTO';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
+
+import { api } from '@services/api';
+import { AppError } from '@utils/AppError';
 
 type FormDataProps = {
   name: string;
@@ -56,6 +62,7 @@ export const NewDevice = () => {
 
   const toast = useToast();
   const { colors } = useTheme();
+  const { user } = useAuth();
   const { pickImage } = useImage();
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
@@ -102,14 +109,56 @@ export const NewDevice = () => {
     }
   };
 
-  const handleCreateModule = () => {
-    if (!image) {
-      toast.show({
-        title: 'Selecione uma imagem!',
-        placement: 'top',
-        bgColor: 'red.light',
+  const handleCreateModule = async (data: FormDataProps) => {
+    // if (!image) {
+    //   toast.show({
+    //     title: 'Selecione uma imagem!',
+    //     placement: 'top',
+    //     bgColor: 'red.light',
+    //   });
+    //   return;
+    // }
+    setLoading(true);
+
+    const generateId = uuid.v4();
+    const id = generateId.replace(/\D/g, '').slice(0, 6);
+
+    try {
+      await api.post(`/api/device/create/`, {
+        email: user.email,
+        deviceId: id,
+        device: {
+          id,
+          name: data.name,
+          type: moduleType,
+          category,
+          sensitivity: moduleSensitivity,
+        },
+        image,
       });
-      return;
+
+      toast.show({
+        title: 'Dispositivo editado com sucesso!',
+        placement: 'top',
+        bgColor: 'green.light',
+      });
+
+      navigation.navigate('device', { id });
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível editar o dispositivo. Tente Novamente!';
+
+      if (isAppError) {
+        toast.show({
+          title,
+          placement: 'top',
+          bgColor: 'red.middle',
+        });
+      }
+    } finally {
+      setLoading(false);
     }
   };
 

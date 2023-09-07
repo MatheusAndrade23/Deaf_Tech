@@ -157,9 +157,7 @@ export const DeviceConfig = () => {
         bgColor: 'green.light',
       });
 
-      setTimeout(() => {
-        checkIfDeviceConnectedToNetwork();
-      }, 5000);
+      checkIfDeviceConnectedToNetwork();
     } catch (error) {
       const isBleError = error instanceof BleError;
 
@@ -176,40 +174,47 @@ export const DeviceConfig = () => {
   };
 
   const checkIfDeviceConnectedToNetwork = async () => {
-    try {
-      const { data } = await api.get(`/api/connection/${user.email}`);
+    setTimeout(async () => {
+      try {
+        const { data } = await api.get(`/api/connection/${user.email}/false`);
+        if (data.connected) {
+          navigateToHome();
+          setIsBLuetoothModalOpen(false);
 
-      if (data.connected) {
-        navigateToHome();
-        setIsBLuetoothModalOpen(false);
-      } else {
-        const title = 'Algo deu errado! Por favor, tente novamente!';
+          toast.show({
+            title: 'Conectado com sucesso!',
+            placement: 'top',
+            bgColor: 'green.light',
+          });
+        } else {
+          const title = 'Algo deu errado! Por favor, tente novamente!';
 
-        toast.show({
-          title,
-          placement: 'top',
-          bgColor: 'red.middle',
-        });
+          toast.show({
+            title,
+            placement: 'top',
+            bgColor: 'red.middle',
+          });
 
-        handleTryConnectAgain();
+          handleTryConnectAgain();
+        }
+        setIsButtonLoading(false);
+      } catch (error) {
+        const isAppError = error instanceof AppError;
+        console.log(error);
+        const title = isAppError
+          ? error.message
+          : 'Algo deu errado! Tentando novamente...';
+
+        if (isAppError) {
+          toast.show({
+            title,
+            placement: 'top',
+            bgColor: 'red.middle',
+          });
+        }
+        checkIfDeviceConnectedToNetwork();
       }
-      setIsButtonLoading(false);
-    } catch (error) {
-      const isAppError = error instanceof AppError;
-
-      const title = isAppError
-        ? error.message
-        : 'Algo deu errado! Tentando novamente...';
-
-      if (isAppError) {
-        toast.show({
-          title,
-          placement: 'top',
-          bgColor: 'red.middle',
-        });
-      }
-      checkIfDeviceConnectedToNetwork();
-    }
+    }, 10000);
   };
 
   const handleTryConnectAgain = () => {
@@ -222,11 +227,15 @@ export const DeviceConfig = () => {
     setIsModalDeviceConnectionOpen(false);
   };
 
+  // useEffect(() => {
+  //   checkIfDeviceConnectedToNetwork();
+  // }, []);
+
   useEffect(() => {
     const checkDeviceConnection = async () => {
       try {
         setIsLoading(true);
-        const { data } = await api.get(`/api/connection/${user.email}`);
+        const { data } = await api.get(`/api/connection/${user.email}/false`);
 
         if (data.connected) {
           navigateToHome();
@@ -374,7 +383,7 @@ export const DeviceConfig = () => {
               />
             </Center>
           </ScrollView>
-          {/* <BluetoothStatusModal
+          <BluetoothStatusModal
             bluetoothStatus={bluetoothStatus}
             isModalOpen={isBLuetoothModalOpen}
           />
@@ -388,7 +397,7 @@ export const DeviceConfig = () => {
           <ErrorModal
             isErrorModalVisible={isErrorModalVisible}
             connectToDevice={handleTryConnectAgain}
-          /> */}
+          />
         </>
       )}
     </>

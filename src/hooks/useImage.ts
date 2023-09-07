@@ -3,8 +3,7 @@ import { useToast } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 
-type ImageFile = {
-  name: string;
+export type ImageFile = {
   uri: string;
   type: string;
 };
@@ -43,7 +42,6 @@ export const useImage = (): IImage => {
       const fileExtension = photoSelected.assets[0].uri.split('.').pop();
 
       const photoFile = {
-        name: `${fileExtension}`.toLowerCase(),
         uri: photoSelected.assets[0].uri,
         type: `${photoSelected.assets[0].type}/${fileExtension}`,
       };
