@@ -138,7 +138,7 @@ export const NewDevice = () => {
       });
 
       toast.show({
-        title: 'Dispositivo editado com sucesso!',
+        title: 'Dispositivo criado com sucesso!',
         placement: 'top',
         bgColor: 'green.light',
       });
@@ -148,7 +148,7 @@ export const NewDevice = () => {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
-        : 'Não foi possível editar o dispositivo. Tente Novamente!';
+        : 'Não foi possível criar o dispositivo. Tente Novamente!';
 
       if (isAppError) {
         toast.show({
