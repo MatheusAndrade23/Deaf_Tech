@@ -25,9 +25,20 @@ import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { api } from '@services/api';
 import { AppError } from '@utils/AppError';
 
-type Props = AlarmClockDTO & IButtonProps & {};
+type Props = AlarmClockDTO &
+  IButtonProps & {
+    deleteAlarm: (id: string) => void;
+  };
 
-export const AlarmCard = ({ id, name, days, active, time, ...rest }: Props) => {
+export const AlarmCard = ({
+  id,
+  name,
+  days,
+  active,
+  time,
+  deleteAlarm,
+  ...rest
+}: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [checked, setChecked] = useState(active);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,8 +49,13 @@ export const AlarmCard = ({ id, name, days, active, time, ...rest }: Props) => {
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
+  const handleDeleteAlarm = async () => {
+    setIsModalVisible(false);
+    deleteAlarm(id);
+  };
+
   const handleChangeAlarmState = (value: boolean) => {
-    // setIsLoading(true);
+    setIsLoading(true);
     toggleAlarmState(value);
 
     if (checked !== value) {
@@ -48,25 +64,25 @@ export const AlarmCard = ({ id, name, days, active, time, ...rest }: Props) => {
   };
 
   const toggleAlarmState = async (value: boolean) => {
-    // try {
-    //   await api.patch(`/api/devices/toggle`, {
-    //     email: user.email,
-    //     id,
-    //   });
-    // } catch (error) {
-    //   const isAppError = error instanceof AppError;
-    //   const title = isAppError
-    //     ? error.message
-    //     : 'Não foi possível alterar o estado do dispositivo. Tente Novamente!';
-    //   toast.show({
-    //     title,
-    //     placement: 'top',
-    //     bgColor: 'red.middle',
-    //   });
-    //   setChecked(!value);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      await api.patch(`/api/alarms/toggle`, {
+        email: user.email,
+        id,
+      });
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível alterar o estado do dispositivo. Tente Novamente!';
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.middle',
+      });
+      setChecked(!value);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -155,7 +171,9 @@ export const AlarmCard = ({ id, name, days, active, time, ...rest }: Props) => {
                 {days.length === 7 && <Text>Todos os dias</Text>}
                 {days.length < 7 &&
                   days.map((day) => (
-                    <Text fontStyle="italic">{formatDay(day)}</Text>
+                    <Text fontStyle="italic" key={day}>
+                      {formatDay(day)}
+                    </Text>
                   ))}
               </HStack>
             </VStack>
@@ -172,7 +190,7 @@ export const AlarmCard = ({ id, name, days, active, time, ...rest }: Props) => {
                 text="Excluir"
                 variant="tertiary"
                 borderWidth={0}
-                onPress={() => setIsModalVisible(false)}
+                onPress={handleDeleteAlarm}
               />
             </HStack>
           </Modal.Footer>
