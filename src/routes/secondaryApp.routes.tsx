@@ -5,11 +5,12 @@ import {
   BottomTabNavigationProp,
 } from '@react-navigation/bottom-tabs';
 
-import { House, GearSix, Question } from 'phosphor-react-native';
+import { House, GearSix, Question, Alarm } from 'phosphor-react-native';
 
 import { Home } from '@screens/Home';
 import { Settings } from '@screens/Settings';
 import { Help } from '@screens/Help';
+import { AlarmClock } from '@screens/AlarmClock';
 
 import LibrasLogo from '@assets/libras.svg';
 
@@ -17,6 +18,7 @@ type SecondaryAppRoutes = {
   home: undefined;
   settings: undefined;
   help: undefined;
+  alarm: undefined;
 };
 
 export type AppNavigatorRoutesProps =
@@ -62,6 +64,17 @@ export const SecondaryAppRoutes = () => {
         options={{
           tabBarIcon: ({ color }) => (
             <GearSix size={iconSize} color={color} weight="bold" />
+          ),
+        }}
+      />
+
+      <Screen
+        name="alarm"
+        component={AlarmClock}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Alarm size={iconSize} color={color} weight="bold" />
+            // <Question size={iconSize} color={color} weight="bold" />
           ),
         }}
       />
