@@ -18,6 +18,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Button } from '@components/Button';
 import { Loading } from '@components/Loading';
 import { IconButton } from '@components/IconButton';
+import { LibrasButton } from '@components/LibrasButton';
 
 import {
   ArrowLeft,
@@ -376,6 +377,7 @@ export const Settings = () => {
           </VStack>
         </>
       )}
+      <LibrasButton />
     </ScrollView>
   );
 };

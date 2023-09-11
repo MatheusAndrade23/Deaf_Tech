@@ -14,6 +14,7 @@ import {
 import { Loading } from '@components/Loading';
 import { RoomCard } from '@components/RoomCard';
 import { IconButton } from '@components/IconButton';
+import { LibrasButton } from '@components/LibrasButton';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { useNavigation } from '@react-navigation/native';
@@ -98,7 +99,7 @@ export const Home = () => {
           contentContainerStyle={{ flex: 1 }}
           renderItem={({ item }) => <RoomCard maxH="16" mb="2" {...item} />}
           ListEmptyComponent={() => (
-            <Center h="full">
+            <Center h="full" mt="-8">
               <Placeholder
                 color={colors.gray.quaternary}
                 size={90}
@@ -114,6 +115,7 @@ export const Home = () => {
           )}
         />
       )}
+      <LibrasButton />
     </VStack>
   );
 };

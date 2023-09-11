@@ -14,6 +14,7 @@ import { Plus, Placeholder } from 'phosphor-react-native';
 import { Loading } from '@components/Loading';
 import { IconButton } from '@components/IconButton';
 import { AlarmCard } from '@components/AlarmCard';
+import { LibrasButton } from '@components/LibrasButton';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -140,6 +141,7 @@ export const AlarmClock = () => {
           )}
         />
       )}
+      <LibrasButton />
     </VStack>
   );
 };
