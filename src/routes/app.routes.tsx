@@ -5,8 +5,9 @@ import {
 
 import { Device } from '@screens/Device';
 import { NewDevice } from '@screens/NewDevice';
-import { DeviceConfig } from '@screens/DeviceConfig';
 import { EditDevice } from '@screens/EditDevice';
+import { DeviceConfig } from '@screens/DeviceConfig';
+import { NewAlarmClock } from '@screens/NewAlarmClock';
 
 import { SecondaryAppRoutes } from './secondaryApp.routes';
 
@@ -19,8 +20,9 @@ type AppRoutes = {
     reConfig: true | undefined;
   };
   newDevice: undefined;
+  newAlarmClock: undefined;
   app: {
-    screen: 'help' | 'home' | 'settings';
+    screen: 'help' | 'home' | 'settings' | 'alarm';
   };
   device: {
     id: string;
@@ -41,6 +43,7 @@ export const AppRoutes = () => {
       <Screen name="editDevice" component={EditDevice} />
       <Screen name="app" component={SecondaryAppRoutes} />
       <Screen name="deviceConfig" component={DeviceConfig} />
+      <Screen name="newAlarmClock" component={NewAlarmClock} />
     </Navigator>
   );
 };

@@ -15,7 +15,8 @@ import { Loading } from '@components/Loading';
 import { IconButton } from '@components/IconButton';
 import { AlarmCard } from '@components/AlarmCard';
 
-import { useFocusEffect } from '@react-navigation/native';
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '@hooks/useAuth';
 import { AlarmClockDTO } from '@dtos/AlarmClockDTO';
@@ -31,6 +32,12 @@ export const AlarmClock = () => {
   const toast = useToast();
   const { user } = useAuth();
   const { colors } = useTheme();
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const goToNewAlarmClockScreen = () => {
+    navigation.navigate('newAlarmClock');
+  };
 
   const deleteAlarm = async (id: string) => {
     setIsLoadingData(true);
@@ -99,6 +106,7 @@ export const AlarmClock = () => {
           right="0"
           position="absolute"
           icon={<Plus color={colors.secondaryColor} size={30} />}
+          onPress={goToNewAlarmClockScreen}
         />
       </HStack>
       {isLoadingData ? (

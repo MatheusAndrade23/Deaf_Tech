@@ -59,6 +59,16 @@ export const SecondaryAppRoutes = () => {
       />
 
       <Screen
+        name="alarm"
+        component={AlarmClock}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Alarm size={iconSize} color={color} weight="bold" />
+          ),
+        }}
+      />
+
+      <Screen
         name="settings"
         component={Settings}
         options={{
@@ -69,23 +79,12 @@ export const SecondaryAppRoutes = () => {
       />
 
       <Screen
-        name="alarm"
-        component={AlarmClock}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Alarm size={iconSize} color={color} weight="bold" />
-            // <Question size={iconSize} color={color} weight="bold" />
-          ),
-        }}
-      />
-
-      <Screen
         name="help"
         component={Help}
         options={{
           tabBarIcon: ({ color }) => (
-            <LibrasLogo fill={color} width={60} height={60} />
-            // <Question size={iconSize} color={color} weight="bold" />
+            // <LibrasLogo fill={color} width={60} height={60} />
+            <Question size={iconSize} color={color} weight="bold" />
           ),
         }}
       />
