@@ -31,72 +31,91 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
   return (
     <HStack mt="2">
       <VStack>
-        <Checkbox
-          value="segunda"
-          my="1"
-          onTouchStart={() => handleSelectDay('segunda')}
-        >
-          <Text fontFamily="body" color={elementsColor('segunda')}>
+        <HStack alignItems="center">
+          <Checkbox
+            value="segunda"
+            my="1"
+            aria-label="Segunda Feira"
+            onTouchStart={() => handleSelectDay('segunda')}
+          />
+          <Text fontFamily="body" color={elementsColor('segunda')} ml="2">
             Segunda Feira
           </Text>
-        </Checkbox>
-        <Checkbox
-          value="terça"
-          my="1"
-          onTouchStart={() => handleSelectDay('terça')}
-        >
-          <Text fontFamily="body" color={elementsColor('terça')}>
+        </HStack>
+
+        <HStack alignItems="center">
+          <Checkbox
+            value="terça"
+            my="1"
+            aria-label="Terça Feira"
+            onTouchStart={() => handleSelectDay('terça')}
+          />
+          <Text fontFamily="body" color={elementsColor('terça')} ml="2">
             Terça Feira
           </Text>
-        </Checkbox>
-        <Checkbox
-          value="quarta"
-          my="1"
-          onTouchStart={() => handleSelectDay('quarta')}
-        >
-          <Text fontFamily="body" color={elementsColor('quarta')}>
+        </HStack>
+
+        <HStack alignItems="center">
+          <Checkbox
+            value="quarta"
+            my="1"
+            aria-label="Quarta Feira"
+            onTouchStart={() => handleSelectDay('quarta')}
+          />
+          <Text fontFamily="body" color={elementsColor('quarta')} ml="2">
             Quarta Feira
           </Text>
-        </Checkbox>
-        <Checkbox
-          value="quinta"
-          my="1"
-          onTouchStart={() => handleSelectDay('quinta')}
-        >
-          <Text fontFamily="body" color={elementsColor('quinta')}>
+        </HStack>
+
+        <HStack alignItems="center">
+          <Checkbox
+            value="quinta"
+            my="1"
+            aria-label="Quinta Feira"
+            onTouchStart={() => handleSelectDay('quinta')}
+          />
+          <Text fontFamily="body" color={elementsColor('quinta')} ml="2">
             Quinta Feira
           </Text>
-        </Checkbox>
+        </HStack>
       </VStack>
 
       <VStack ml="5">
-        <Checkbox
-          value="sexta"
-          my="1"
-          onTouchStart={() => handleSelectDay('sexta')}
-        >
-          <Text fontFamily="body" color={elementsColor('sexta')}>
+        <HStack alignItems="center">
+          <Checkbox
+            value="sexta"
+            my="1"
+            aria-label="Sexta Feira"
+            onTouchStart={() => handleSelectDay('sexta')}
+          />
+          <Text fontFamily="body" color={elementsColor('sexta')} ml="2">
             Sexta Feira
           </Text>
-        </Checkbox>
-        <Checkbox
-          value="sábado"
-          my="1"
-          onTouchStart={() => handleSelectDay('sábado')}
-        >
-          <Text fontFamily="body" color={elementsColor('sábado')}>
+        </HStack>
+
+        <HStack alignItems="center">
+          <Checkbox
+            value="sábado"
+            my="1"
+            aria-label="Sábado"
+            onTouchStart={() => handleSelectDay('sábado')}
+          />
+          <Text fontFamily="body" color={elementsColor('sábado')} ml="2">
             Sábado
           </Text>
-        </Checkbox>
-        <Checkbox
-          value="domingo"
-          my="1"
-          onTouchStart={() => handleSelectDay('domingo')}
-        >
-          <Text fontFamily="body" color={elementsColor('domingo')}>
+        </HStack>
+
+        <HStack alignItems="center">
+          <Checkbox
+            value="domingo"
+            my="1"
+            aria-label="Domingo"
+            onTouchStart={() => handleSelectDay('domingo')}
+          />
+          <Text fontFamily="body" color={elementsColor('domingo')} ml="2">
             Domingo
           </Text>
-        </Checkbox>
+        </HStack>
       </VStack>
     </HStack>
   );
