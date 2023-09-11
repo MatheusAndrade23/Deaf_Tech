@@ -2,13 +2,13 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 
 import { AppError } from '@utils/AppError';
 
-const api = axios.create({
-  baseURL: 'http://192.168.0.141:3000',
-});
-
 // const api = axios.create({
-//   baseURL: 'https://deaftech-backend.vercel.app/',
+//   baseURL: 'http://10.0.0.154:3000/',
 // });
+
+const api = axios.create({
+  baseURL: 'https://deaftech-backend.vercel.app/',
+});
 
 api.interceptors.response.use(
   (response) => {
