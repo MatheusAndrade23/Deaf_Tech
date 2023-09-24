@@ -6,8 +6,9 @@ import {
 import { Device } from '@screens/Device';
 import { NewDevice } from '@screens/NewDevice';
 import { EditDevice } from '@screens/EditDevice';
-import { DeviceWifiConnection } from '@screens/DeviceWifiConnection';
 import { NewAlarmClock } from '@screens/NewAlarmClock';
+import { EditAlarmClock } from '@screens/EditAlarmClock';
+import { DeviceWifiConnection } from '@screens/DeviceWifiConnection';
 
 import { SecondaryAppRoutes } from './secondaryApp.routes';
 
@@ -19,6 +20,9 @@ type AppRoutes = {
   deviceWifiConnection: undefined;
   newDevice: undefined;
   newAlarmClock: undefined;
+  editAlarmClock: {
+    id: string;
+  };
   app: {
     screen: 'help' | 'home' | 'settings' | 'alarm';
   };
@@ -37,6 +41,7 @@ export const AppRoutes = () => {
       <Screen name="newDevice" component={NewDevice} />
       <Screen name="editDevice" component={EditDevice} />
       <Screen name="app" component={SecondaryAppRoutes} />
+      <Screen name="editAlarmClock" component={EditAlarmClock} />
       <Screen name="deviceWifiConnection" component={DeviceWifiConnection} />
       <Screen name="newAlarmClock" component={NewAlarmClock} />
     </Navigator>

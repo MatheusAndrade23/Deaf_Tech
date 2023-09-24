@@ -5,7 +5,11 @@ type Props = {
   setDays: (days: string[]) => void;
 };
 
-export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
+export const AlarmClockDaysSelector = ({
+  days = [],
+  setDays,
+  ...rest
+}: Props) => {
   const { colors } = useTheme();
 
   const elementsColor = (day: string) => {
@@ -36,7 +40,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="segunda"
             my="1"
             aria-label="Segunda Feira"
-            onTouchStart={() => handleSelectDay('segunda')}
+            onChange={() => handleSelectDay('segunda')}
+            isChecked={days.includes('segunda')}
           />
           <Text fontFamily="body" color={elementsColor('segunda')} ml="2">
             Segunda Feira
@@ -48,7 +53,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="terça"
             my="1"
             aria-label="Terça Feira"
-            onTouchStart={() => handleSelectDay('terça')}
+            onChange={() => handleSelectDay('terça')}
+            isChecked={days.includes('terça')}
           />
           <Text fontFamily="body" color={elementsColor('terça')} ml="2">
             Terça Feira
@@ -60,7 +66,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="quarta"
             my="1"
             aria-label="Quarta Feira"
-            onTouchStart={() => handleSelectDay('quarta')}
+            onChange={() => handleSelectDay('quarta')}
+            isChecked={days.includes('quarta')}
           />
           <Text fontFamily="body" color={elementsColor('quarta')} ml="2">
             Quarta Feira
@@ -72,7 +79,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="quinta"
             my="1"
             aria-label="Quinta Feira"
-            onTouchStart={() => handleSelectDay('quinta')}
+            onChange={() => handleSelectDay('quinta')}
+            isChecked={days.includes('quinta')}
           />
           <Text fontFamily="body" color={elementsColor('quinta')} ml="2">
             Quinta Feira
@@ -86,7 +94,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="sexta"
             my="1"
             aria-label="Sexta Feira"
-            onTouchStart={() => handleSelectDay('sexta')}
+            onChange={() => handleSelectDay('sexta')}
+            isChecked={days.includes('sexta')}
           />
           <Text fontFamily="body" color={elementsColor('sexta')} ml="2">
             Sexta Feira
@@ -98,7 +107,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="sábado"
             my="1"
             aria-label="Sábado"
-            onTouchStart={() => handleSelectDay('sábado')}
+            onChange={() => handleSelectDay('sábado')}
+            isChecked={days.includes('sábado')}
           />
           <Text fontFamily="body" color={elementsColor('sábado')} ml="2">
             Sábado
@@ -110,7 +120,8 @@ export const AlarmClockDaysSelector = ({ days, setDays, ...rest }: Props) => {
             value="domingo"
             my="1"
             aria-label="Domingo"
-            onTouchStart={() => handleSelectDay('domingo')}
+            onChange={() => handleSelectDay('domingo')}
+            isChecked={days.includes('domingo')}
           />
           <Text fontFamily="body" color={elementsColor('domingo')} ml="2">
             Domingo

@@ -49,6 +49,11 @@ export const AlarmCard = ({
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
+  const handleEditAlarm = () => {
+    setIsModalVisible(false);
+    navigation.navigate('editAlarmClock', { id });
+  };
+
   const handleDeleteAlarm = async () => {
     setIsModalVisible(false);
     deleteAlarm(id);
@@ -173,6 +178,7 @@ export const AlarmCard = ({
                   days.map((day) => (
                     <Text fontStyle="italic" key={day}>
                       {formatDay(day)}
+                      {days.indexOf(day) !== days.length - 1 ? ', ' : ''}
                     </Text>
                   ))}
               </HStack>
@@ -180,11 +186,7 @@ export const AlarmCard = ({
           </Modal.Body>
           <Modal.Footer>
             <HStack w="full" justifyContent="space-between">
-              <Button
-                w="48%"
-                text="Editar"
-                onPress={() => setIsModalVisible(false)}
-              />
+              <Button w="48%" text="Editar" onPress={handleEditAlarm} />
               <Button
                 w="48%"
                 text="Excluir"
@@ -201,7 +203,7 @@ export const AlarmCard = ({
 };
 
 const formatDay = (day: string) => {
-  const treatedDay = day.charAt(0).toUpperCase() + day.slice(1) + ' ';
+  const treatedDay = day.charAt(0).toUpperCase() + day.slice(1);
 
   return treatedDay;
 };
