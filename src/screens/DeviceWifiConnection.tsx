@@ -17,9 +17,9 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Loading } from '@components/Loading';
 
-import { ErrorModal } from './components/ErrorModal';
-import { BluetoothStatusModal } from './components/BluetoothStatusModal';
-import { DeviceConnectionModal } from './components/DeviceConnectionModal';
+import { ErrorModal } from '@components/ErrorModal';
+import { BluetoothStatusModal } from '@components/BluetoothStatusModal';
+import { DeviceConnectionModal } from '@components/DeviceConnectionModal';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -61,7 +61,7 @@ const networkInfoSchema = yup.object({
   password: yup.string().required('Informe a senha da rede Wifi'),
 });
 
-export const DeviceConfig = () => {
+export const DeviceWifiConnection = () => {
   const [isBLuetoothModalOpen, setIsBLuetoothModalOpen] = useState(true);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);

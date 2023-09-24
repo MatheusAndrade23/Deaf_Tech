@@ -4,7 +4,7 @@ import { Device } from 'react-native-ble-plx';
 
 import { Placeholder } from 'phosphor-react-native';
 
-import { DeviceModalListItem } from './components/DeviceModalListItem';
+import { DeviceModalListItem } from '@components/DeviceModalListItem';
 
 type Props = {
   devices: Device[];

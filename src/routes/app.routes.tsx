@@ -6,7 +6,7 @@ import {
 import { Device } from '@screens/Device';
 import { NewDevice } from '@screens/NewDevice';
 import { EditDevice } from '@screens/EditDevice';
-import { DeviceConfig } from '@screens/DeviceConfig';
+import { DeviceWifiConnection } from '@screens/DeviceWifiConnection';
 import { NewAlarmClock } from '@screens/NewAlarmClock';
 
 import { SecondaryAppRoutes } from './secondaryApp.routes';
@@ -42,7 +42,7 @@ export const AppRoutes = () => {
       <Screen name="newDevice" component={NewDevice} />
       <Screen name="editDevice" component={EditDevice} />
       <Screen name="app" component={SecondaryAppRoutes} />
-      <Screen name="deviceConfig" component={DeviceConfig} />
+      <Screen name="deviceConfig" component={DeviceWifiConnection} />
       <Screen name="newAlarmClock" component={NewAlarmClock} />
     </Navigator>
   );
