@@ -1,10 +1,24 @@
-import { Center, Text, useTheme, Modal, VStack, FlatList } from 'native-base';
+import {
+  Center,
+  Text,
+  useTheme,
+  Modal,
+  VStack,
+  FlatList,
+  Box,
+} from 'native-base';
 
 import { Device } from 'react-native-ble-plx';
 
 import { Placeholder } from 'phosphor-react-native';
 
+import { IconButton } from '@components/IconButton';
 import { DeviceModalListItem } from '@components/DeviceModalListItem';
+
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
+import { useNavigation } from '@react-navigation/native';
+
+import { X } from 'phosphor-react-native';
 
 type Props = {
   devices: Device[];
@@ -23,6 +37,12 @@ export const DeviceConnectionModal = ({
 }: Props) => {
   const { colors } = useTheme();
 
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const navigateToHome = () => {
+    navigation.navigate('app', { screen: 'home' });
+  };
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -35,8 +55,22 @@ export const DeviceConnectionModal = ({
     >
       <Modal.Content h="full" w="full">
         <VStack h="full" w="full" p="4">
+          <IconButton
+            icon={<X color={colors.red.middle} weight="bold" size={25} />}
+            position="absolute"
+            top={4}
+            right={2}
+            onPress={navigateToHome}
+            zIndex={100}
+          />
           <Center mb="4">
-            <Text fontFamily="heading" color="gray.primary" fontSize="md">
+            <Text
+              fontFamily="heading"
+              color="gray.primary"
+              fontSize="md"
+              w="80%"
+              textAlign="center"
+            >
               Clique em um dispositivo para conectar
             </Text>
           </Center>
