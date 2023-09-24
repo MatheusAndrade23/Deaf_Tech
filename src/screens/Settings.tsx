@@ -24,7 +24,7 @@ import {
   ArrowLeft,
   Moon,
   Sun,
-  Gear,
+  WifiHigh,
   Image,
   Repeat,
   Bell,
@@ -61,29 +61,33 @@ export const Settings = () => {
     navigation.navigate('app', { screen: 'home' });
   };
 
-  const handleGoToCentralConfig = async () => {
-    setReconfigureCentralLoading(true);
-    try {
-      await api.patch(`/api/reconnection`, {
-        email: user.email,
-      });
-
-      navigation.navigate('deviceConfig', { reConfig: true });
-    } catch (error) {
-      const isAppError = error instanceof AppError;
-      const title = isAppError
-        ? error.message
-        : 'Algo deu errado. Tente Novamente!';
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.middle',
-      });
-    } finally {
-      setReconfigureCentralLoading(false);
-    }
+  const handleGoToDeviceConfig = () => {
+    navigation.navigate('deviceWifiConnection');
   };
+
+  // const handleGoToCentralConfig = async () => {
+  //   setReconfigureCentralLoading(true);
+  //   try {
+  //     await api.patch(`/api/reconnection`, {
+  //       email: user.email,
+  //     });
+
+  //     navigation.navigate('deviceWifiConnection');
+  //   } catch (error) {
+  //     const isAppError = error instanceof AppError;
+  //     const title = isAppError
+  //       ? error.message
+  //       : 'Algo deu errado. Tente Novamente!';
+
+  //     toast.show({
+  //       title,
+  //       placement: 'top',
+  //       bgColor: 'red.middle',
+  //     });
+  //   } finally {
+  //     setReconfigureCentralLoading(false);
+  //   }
+  // };
 
   const handleToggleConfig = async (
     configName: keyof typeof config,
@@ -230,12 +234,12 @@ export const Settings = () => {
               </Text>
 
               <Button
-                text="Reconectar Central"
+                text="Conectar Dispositivo ao Wifi"
                 mt="2"
                 variant="secondary"
-                onPress={handleGoToCentralConfig}
+                onPress={handleGoToDeviceConfig}
                 isLoading={reconfigureCentralLoading}
-                icon={<Gear color={colors.gray.tertiary} />}
+                icon={<WifiHigh color={colors.gray.tertiary} weight="bold" />}
               />
 
               <Text
@@ -252,7 +256,7 @@ export const Settings = () => {
                 name="Seletor de Tema"
                 defaultValue={themeMode}
                 onChange={(nextValue) => {
-                  changeTheme(nextValue);
+                  changeTheme(nextValue as 'light' | 'dark');
                 }}
               >
                 <HStack>

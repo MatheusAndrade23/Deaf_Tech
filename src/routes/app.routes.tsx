@@ -16,9 +16,7 @@ const { Navigator, Screen } = createNativeStackNavigator<AppRoutes>();
 export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;
 
 type AppRoutes = {
-  deviceConfig: {
-    reConfig: true | undefined;
-  };
+  deviceWifiConnection: undefined;
   newDevice: undefined;
   newAlarmClock: undefined;
   app: {
@@ -34,15 +32,12 @@ type AppRoutes = {
 
 export const AppRoutes = () => {
   return (
-    <Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="deviceConfig"
-    >
+    <Navigator screenOptions={{ headerShown: false }} initialRouteName="app">
       <Screen name="device" component={Device} />
       <Screen name="newDevice" component={NewDevice} />
       <Screen name="editDevice" component={EditDevice} />
       <Screen name="app" component={SecondaryAppRoutes} />
-      <Screen name="deviceConfig" component={DeviceWifiConnection} />
+      <Screen name="deviceWifiConnection" component={DeviceWifiConnection} />
       <Screen name="newAlarmClock" component={NewAlarmClock} />
     </Navigator>
   );
