@@ -23,6 +23,7 @@ interface BluetoothLowEnergyApi {
   allDevices: Device[];
   checkBluetoothStatus(): Promise<boolean>;
   error: BleError | null;
+  stopScan: () => void;
   writeDataToCharacteristic(data: string): Promise<void>;
 }
 
@@ -116,6 +117,8 @@ export const useBLE = (): BluetoothLowEnergyApi => {
       }
     });
 
+  const stopScan = () => bleManager.stopDeviceScan();
+
   const connectToDevice = async (device: Device) => {
     const deviceConnection = await bleManager.connectToDevice(device.id);
     setConnectedDevice(deviceConnection);
@@ -152,6 +155,7 @@ export const useBLE = (): BluetoothLowEnergyApi => {
     disconnectFromDevice,
     checkBluetoothStatus,
     writeDataToCharacteristic,
+    stopScan,
     error,
   };
 };
