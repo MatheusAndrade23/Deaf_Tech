@@ -6,7 +6,7 @@ import { IconButton } from '@components/IconButton';
 
 import LibrasLogo from '@assets/libras.svg';
 
-export const LibrasButton = () => {
+export const LibrasButton = ({ ...rest }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { colors } = useTheme();
 
@@ -29,6 +29,7 @@ export const LibrasButton = () => {
         onPress={() => {
           setIsModalOpen(true);
         }}
+        {...rest}
       />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Content w="full" minH="500">
