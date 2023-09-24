@@ -22,7 +22,7 @@ import { BluetoothStatusModal } from '@components/BluetoothStatusModal';
 import { DeviceConnectionModal } from '@components/DeviceConnectionModal';
 
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,13 +43,10 @@ import {
   Question,
   Eye,
   EyeSlash,
+  ArrowLeft,
 } from 'phosphor-react-native';
 
 import Logo from '@assets/logo.png';
-
-type RouteParams = {
-  reConfig: true | undefined;
-};
 
 type FormDataProps = {
   name: string;
@@ -78,9 +75,6 @@ export const DeviceWifiConnection = () => {
   const { user } = useAuth();
   const { colors } = useTheme();
 
-  const route = useRoute();
-  const params = route.params as RouteParams;
-
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   const {
@@ -91,6 +85,7 @@ export const DeviceWifiConnection = () => {
     checkBluetoothStatus,
     writeDataToCharacteristic,
     error,
+    stopScan,
   } = useBLE();
 
   const {
@@ -157,7 +152,7 @@ export const DeviceWifiConnection = () => {
         bgColor: 'green.light',
       });
 
-      checkIfDeviceConnectedToNetwork();
+      // checkIfDeviceConnectedToNetwork();
     } catch (error) {
       const isBleError = error instanceof BleError;
 
@@ -232,41 +227,41 @@ export const DeviceWifiConnection = () => {
   // }, []);
 
   useEffect(() => {
-    const checkDeviceConnection = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await api.get(`/api/connection/${user.email}/false`);
+    // const checkDeviceConnection = async () => {
+    //   try {
+    //     setIsLoading(true);
+    //     const { data } = await api.get(`/api/connection/${user.email}/false`);
 
-        if (data.connected) {
-          navigateToHome();
-          setIsBLuetoothModalOpen(false);
-        } else {
-          setIsLoading(false);
-        }
-      } catch (error) {
-        const isAppError = error instanceof AppError;
+    //     if (data.connected) {
+    //       navigateToHome();
+    //       setIsBLuetoothModalOpen(false);
+    //     } else {
+    //       setIsLoading(false);
+    //     }
+    //   } catch (error) {
+    //     const isAppError = error instanceof AppError;
 
-        const title = isAppError
-          ? error.message
-          : 'Algo deu errado! Tentando novamente...';
+    //     const title = isAppError
+    //       ? error.message
+    //       : 'Algo deu errado! Tentando novamente...';
 
-        if (isAppError) {
-          toast.show({
-            title,
-            placement: 'top',
-            bgColor: 'red.middle',
-          });
-        }
-        checkDeviceConnection();
-      }
-    };
+    //     if (isAppError) {
+    //       toast.show({
+    //         title,
+    //         placement: 'top',
+    //         bgColor: 'red.middle',
+    //       });
+    //     }
+    //     checkDeviceConnection();
+    //   }
+    // };
 
-    if (!params?.reConfig) {
-      checkDeviceConnection();
-    } else {
-      setIsLoading(false);
-      setIsBLuetoothModalOpen(true);
-    }
+    // if (!params?.reConfig) {
+    //   checkDeviceConnection();
+    // } else {
+    //   setIsLoading(false);
+    //   setIsBLuetoothModalOpen(true);
+    // }
 
     const interval = setInterval(async () => {
       const isBluetoothEnabled = await checkBluetoothStatus();
@@ -280,8 +275,11 @@ export const DeviceWifiConnection = () => {
       }
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [params]);
+    return () => {
+      clearInterval(interval);
+      stopScan();
+    };
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -312,7 +310,7 @@ export const DeviceWifiConnection = () => {
         <>
           <ScrollView>
             <Center flex={1} px="8">
-              <Image source={Logo} alt="Logotipo" mt="20%" maxWidth={200} />
+              <Image source={Logo} alt="Logotipo" mt="20%" />
               <Text
                 color="secondaryColor"
                 fontFamily="heading"
