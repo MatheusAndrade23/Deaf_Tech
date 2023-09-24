@@ -152,6 +152,7 @@ export const DeviceWifiConnection = () => {
         bgColor: 'green.light',
       });
 
+      navigateToHome();
       // checkIfDeviceConnectedToNetwork();
     } catch (error) {
       const isBleError = error instanceof BleError;
