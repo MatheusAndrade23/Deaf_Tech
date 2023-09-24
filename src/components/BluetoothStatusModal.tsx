@@ -3,6 +3,13 @@ import { Center, Text, useTheme, Modal, HStack } from 'native-base';
 import { Bluetooth, BluetoothX, Plus, MapPin } from 'phosphor-react-native';
 
 import { Loading } from '@components/Loading';
+import { IconButton } from '@components/IconButton';
+import { LibrasButton } from '@components/LibrasButton';
+
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
+import { useNavigation } from '@react-navigation/native';
+
+import { X } from 'phosphor-react-native';
 
 type Props = {
   bluetoothStatus: 'unknown' | 'on' | 'off';
@@ -14,6 +21,12 @@ export const BluetoothStatusModal = ({
   isModalOpen,
 }: Props) => {
   const { colors } = useTheme();
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const navigateToHome = () => {
+    navigation.navigate('app', { screen: 'home' });
+  };
 
   return (
     <Modal
@@ -47,6 +60,14 @@ export const BluetoothStatusModal = ({
       {bluetoothStatus == 'off' && (
         <Modal.Content h="full" w="full">
           <Modal.Body>
+            <IconButton
+              icon={<X color={colors.red.middle} weight="bold" size={25} />}
+              position="absolute"
+              top={4}
+              right={2}
+              onPress={navigateToHome}
+              zIndex={100}
+            />
             <Center mt="6">
               <HStack
                 alignItems="center"
@@ -62,18 +83,25 @@ export const BluetoothStatusModal = ({
                 <MapPin color={colors.red.middle} size={120} weight="thin" />
               </HStack>
 
-              <Text fontFamily="heading" color={colors.red.middle}>
+              <Text
+                fontFamily="heading"
+                fontSize="md"
+                color={colors.red.middle}
+              >
                 Bluetooth desligado
               </Text>
               <Text
                 fontFamily="heading"
                 mt="8"
-                fontSize="md"
-                textAlign="center"
+                textAlign="left"
+                maxWidth="70%"
+                alignSelf="flex-start"
+                ml="4"
               >
                 Por favor, ative o bluetooth e a localização do dispositivo
               </Text>
             </Center>
+            <LibrasButton bottom={4} />
           </Modal.Body>
         </Modal.Content>
       )}
