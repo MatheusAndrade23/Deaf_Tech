@@ -21,6 +21,7 @@ import {
 import { Button } from '@components/Button';
 import { Loading } from '@components/Loading';
 import { IconButton } from '@components/IconButton';
+import { LibrasButton } from '@components/LibrasButton';
 import { CategoryAndTypeIcon } from '@components/CategoryAndTypeIcon';
 import { BatteryLevelIndicator } from '@components/BatteryLevelIndicator';
 
@@ -382,6 +383,7 @@ export const Device = () => {
           </VStack>
         </>
       )}
+      <LibrasButton top={80} right={2} mt="8" />
     </ScrollView>
   );
 };

@@ -23,6 +23,7 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Loading } from '@components/Loading';
 import { IconButton } from '@components/IconButton';
+import { LibrasButton } from '@components/LibrasButton';
 import { CategoriesSelector } from '@components/CategoriesSelector';
 import { ModuleSensitivitySelector } from '@components/ModuleSensitivitySelector';
 
@@ -354,6 +355,7 @@ export const EditDevice = () => {
           </VStack>
         </>
       )}
+      <LibrasButton bottom={40} />
     </ScrollView>
   );
 };

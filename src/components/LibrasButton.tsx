@@ -32,7 +32,7 @@ export const LibrasButton = ({ ...rest }) => {
         {...rest}
       />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Content w="full" minH="500">
+        <Modal.Content w="98%" minH="500">
           <Modal.CloseButton />
           <Modal.Header>
             <Text>LIBRAS</Text>

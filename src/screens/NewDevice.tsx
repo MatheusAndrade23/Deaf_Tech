@@ -18,6 +18,7 @@ import uuid from 'react-native-uuid';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Loading } from '@components/Loading';
+import { LibrasButton } from '@components/LibrasButton';
 import { IconButton } from '@components/IconButton';
 import { ModuleTypeSelector } from '@components/ModuleTypeSelector';
 import { CategoriesSelector } from '@components/CategoriesSelector';
@@ -323,6 +324,7 @@ export const NewDevice = () => {
           onPress={handleGoBack}
         />
       </VStack>
+      <LibrasButton bottom={40} />
     </ScrollView>
   );
 };
