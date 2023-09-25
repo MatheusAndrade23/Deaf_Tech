@@ -370,7 +370,9 @@ export const Device = () => {
               <Button
                 text="Excluir"
                 variant="tertiary"
-                icon={<TrashSimple color={colors.secondaryColor} />}
+                icon={<TrashSimple color={colors.gray.tertiary} />}
+                disabled
+                borderColor={colors.gray.tertiary}
               />
               <Button
                 mt="2"

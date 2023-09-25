@@ -15,7 +15,13 @@ type Props = IButtonProps & {
   variant?: 'default' | 'secondary' | 'tertiary';
 };
 
-export const Button = ({ text, icon, variant = 'default', ...rest }: Props) => {
+export const Button = ({
+  text,
+  icon,
+  variant = 'default',
+  disabled,
+  ...rest
+}: Props) => {
   const { colors } = useTheme();
 
   const buttonStyle = () => {
@@ -49,7 +55,12 @@ export const Button = ({ text, icon, variant = 'default', ...rest }: Props) => {
     }
   };
 
-  const textStyle = () => {
+  const textStyle = (disabled: boolean | null | undefined) => {
+    if (disabled) {
+      return {
+        color: colors.gray.tertiary,
+      };
+    }
     switch (variant) {
       case 'secondary': {
         return {
@@ -80,10 +91,11 @@ export const Button = ({ text, icon, variant = 'default', ...rest }: Props) => {
         bg: style?.pressed,
       }}
       {...rest}
+      disabled={disabled}
     >
       <HStack w="full" h="full" alignItems="center">
         <Center w="full">
-          <Text fontFamily="heading" fontSize="sm" {...textStyle()}>
+          <Text fontFamily="heading" fontSize="sm" {...textStyle(disabled)}>
             {text}
           </Text>
         </Center>
