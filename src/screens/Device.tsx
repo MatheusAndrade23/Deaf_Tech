@@ -366,7 +366,7 @@ export const Device = () => {
               </HStack>
             )}
 
-            <VStack p="4" mt="8">
+            <VStack p="4" mt={device.type === 'Wired' ? '24' : '8'}>
               <Button
                 text="Excluir"
                 variant="tertiary"
@@ -385,7 +385,7 @@ export const Device = () => {
           </VStack>
         </>
       )}
-      <LibrasButton top={80} right={2} mt="8" />
+      <LibrasButton right={4} bottom={40} mb="2" />
     </ScrollView>
   );
 };
