@@ -21,27 +21,6 @@
 
 ---
 
-<br>
-
-<h2>Menu de Navegação</h2>
-
-- <a href="#introducao">Introdução</a>
-- <a href="#funcionamento">Como Funciona?</a>
-- <a href="#demo">Demonstração</a>
-  - <a href="#tour">Um pequeno tour pelo Projeto</a>
-  - <a href="#trocando">Trocando Páginas</a>
-  - <a href="#mensagens">Mensagens</a>
-- <a href="#tecnologias">Tecnologias Utilizadas</a>
-- <a href="#storybook">Storybook</a>
-- <a href="#testes">Testes com Jest</a>
-- <a href="#detalhes">Alguns Detalhes do Funcionamento do Projeto</a>
-  - <a href="#front">FrontEnd</a>
-  - <a href="#back">BackEnd</a>
-  - <a href="#json">Resposta JSON</a>
-- <a href="#footer">Rodapé</a>
-
----
-
 <br/>
 
 <h2 id="definicao">O que é? 🤔</h2>
