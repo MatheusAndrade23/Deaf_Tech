@@ -1,12 +1,17 @@
 import { useState } from 'react';
 
-import { useTheme, Modal, Text } from 'native-base';
+import { useTheme, Modal, Text, IIconButtonProps } from 'native-base';
 
 import { IconButton } from '@components/IconButton';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 import LibrasLogo from '@assets/libras.svg';
 
-export const LibrasButton = ({ ...rest }) => {
+type Props = IIconButtonProps & {
+  url: string;
+};
+
+export const LibrasButton = ({ url = '', ...rest }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { colors } = useTheme();
 
@@ -32,11 +37,19 @@ export const LibrasButton = ({ ...rest }) => {
         {...rest}
       />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Content w="98%" minH="500">
+        <Modal.Content w="full" mt="auto">
           <Modal.CloseButton />
           <Modal.Header>
-            <Text>LIBRAS</Text>
+            <Text fontFamily="heading" color="primaryColor">
+              LIBRAS
+            </Text>
           </Modal.Header>
+
+          <Modal.Body>
+            {url.length > 0 && (
+              <YoutubePlayer height={215} play videoId={url} />
+            )}
+          </Modal.Body>
         </Modal.Content>
       </Modal>
     </>
