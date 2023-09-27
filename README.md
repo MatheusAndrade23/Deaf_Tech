@@ -12,7 +12,7 @@
 
 <p align="center">
  <a href="#definicao">O que é?</a> •
- <a href="funcionamento">Funcionamento</a> •
+ <a href="#funcionamento">Funcionamento</a> •
  <a href="#demo">Mais sobre o App</a>
 </p>
 
@@ -34,7 +34,7 @@
 
 <br/>
 
-<h2 id="funcionalidades">Funcionamento ⚙️</h2>
+<h2 id="funcionamento">Funcionamento ⚙️</h2>
 
   <p>• O sistema é baseado por sensores detectores de som que são espalhados pela casa e quando detectam qualquer atividade sonora naquele cômodo, 
    eles enviam essa informação para o servidor na nuvem, que dispara uma notificação para o celular do usuário.</p>
