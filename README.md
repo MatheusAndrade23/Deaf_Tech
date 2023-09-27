@@ -4,6 +4,8 @@
  <img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/c98eb6d9-848a-4e4b-97b5-9bf8771a6e5a" width="450px" alt="Logo Image"/>
 </div> 
 
+<br/>
+
 <!-- [![YoutubeVideo](http://img.youtube.com/vi/DXTmdkuJo0w&t/0.jpg)](http://www.youtube.com/watch?v=DXTmdkuJo0w&t) -->
 
 <!-- <p align="center">
@@ -13,10 +15,10 @@
  
 </p> -->
 
-<p align="center"></p>
+<h3 align="center">Deaf Tech - Sistema de Adaptação Residencial para Surdos</h3>
 
 <h4 align="center">
-  <a href="http://www.youtube.com/watch?v=DXTmdkuJo0w&t">Vídeo de Apresentação</a>
+  <a href="http://www.youtube.com/watch?v=DXTmdkuJo0w&t">Clique aqui para ver Vídeo de Apresentação</a>
 </h4>
 
 ---
@@ -36,7 +38,7 @@
 
 <h2 id="funcionalidades">Funcionamento ⚙️</h2>
 
-  - Necessario Hardware
+  <p>O projeto conta com se</p>
   - Sensores espalhados pela casa, detectam som
   - Notificação Aplicativo
 
