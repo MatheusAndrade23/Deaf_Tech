@@ -39,12 +39,20 @@
   <p>• O sistema é baseado por sensores detectores de som que são espalhados pela casa e quando detectam qualquer atividade sonora naquele cômodo, 
    eles enviam essa informação para o servidor na nuvem, que dispara uma notificação para o celular do usuário.</p>
 
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/8f3a0c9b-93b6-41ec-81e8-30c274b13290" width="300px" alt="Notificacao"/>
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/123f4966-bc46-4c7f-a9ed-dbaddbf7ebfd" width="700px" alt="Notificacao"/>
+
+<br/>
+
+<br/>
+
   <p>• A campainha da casa também é monitorada, notificando o usuário quando é acionada.</p>
 
 <img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/29352db3-6e27-45eb-938b-51f29920c652" width="350px" alt="Notificacao"/>
 <img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/2b8f0c98-85ec-4e50-9161-b0966a22e35a" width="350px" alt="Notificacao"/>
 
 <br/>
+
 <br/>
   
 <p>• Uma outra dificuldade da pessoa surda, é com despertadores. Se a pessoa tem um sono pesado, ela sempre depende de outra para acordá-la. Visando isso,
@@ -62,10 +70,9 @@
 
 ![app_icones](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/d2945e71-135f-4130-9d12-6258a88c7fcf)
 
-
 <br/>
 
-<p>Porém, ainda sim há muito texto, e nem todas pessoas surdas tiveram oportunidade de aprender a ler, por isso, cada tela também possui uma explicação em libras, que pode ser facilmente 
+<p>Porém, ainda sim há muito texto, e nem todas pessoas surdas conseguem ler, por isso, cada tela também possui uma explicação em libras, que pode ser facilmente 
 vista apenas com o clique de um botão.</p>
 
 <br/>
