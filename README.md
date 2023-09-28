@@ -40,8 +40,14 @@
    eles enviam essa informação para o servidor na nuvem, que dispara uma notificação para o celular do usuário.</p>
 
   <p>• A campainha da casa também é monitorada, notificando o usuário quando é acionada.</p>
+
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/29352db3-6e27-45eb-938b-51f29920c652" width="350px" alt="Notificacao"/>
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/2b8f0c98-85ec-4e50-9161-b0966a22e35a" width="350px" alt="Notificacao"/>
+
+<br/>
+<br/>
   
-  <p>• Uma outra dificuldade da pessoa surda, é com despertadores. Se a pessoa tem um sono pesado, ela sempre depende de outra para acordá-la. Visando isso,
+<p>• Uma outra dificuldade da pessoa surda, é com despertadores. Se a pessoa tem um sono pesado, ela sempre depende de outra para acordá-la. Visando isso,
   nosso sistema, a cada toque da campainha ou som detectado, a cama vibra, evitando que barulhos noturnos passem despercebidos.</p>
 
 ---
@@ -54,13 +60,18 @@
 
 <p>O design do Aplicativo foi feito visando deixar o mais visual possível, adotando convenções e colocando muitos ícones, para representar todas as informações e ações.</p>
 
-FOTO DO APP MOSTRANDO ICONES
+![app_icones](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/d2945e71-135f-4130-9d12-6258a88c7fcf)
+
+
+<br/>
 
 <p>Porém, ainda sim há muito texto, e nem todas pessoas surdas tiveram oportunidade de aprender a ler, por isso, cada tela também possui uma explicação em libras, que pode ser facilmente 
-vista apenas com o clique de um botão.
-</p>
+vista apenas com o clique de um botão.</p>
 
-VIDEO APP MOSTRANDO AS LIBRAS
+<br/>
+
+![acessibilidade](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/fb8539f4-52fb-4327-889e-b901990df2d0)
+
 
 
   
