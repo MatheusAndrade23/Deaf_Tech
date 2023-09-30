@@ -84,7 +84,6 @@
 - ✔️ Editar/Excluir sensor/cômodo
 - ✔️ Adicionar despertador
 - ✔️ Editar/Excluir despertador
-- ✔️ Bluetooth
 
 ##
 
@@ -102,6 +101,32 @@ vista apenas com o clique de um botão.</p>
 <br/>
 
 ![acessibilidade](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/fb8539f4-52fb-4327-889e-b901990df2d0)
+
+<br/>
+
+<p>A notificação também é acessível, em que, ao invés de aperecer somente texto "Houve um barulho alto no Quarto do Bebê", uma foto do ambiente (que o usuário cadastra no momento da criação do novo cômodo a ser monitorado) aperece e o ícone do nível de barulho é mostrado junto.</p>
+
+Cada cor representa um nível de barulho diferente:
+
+- Barulho Baixo: `Ícone Verde`
+- Barulho Médio: `Ícone Amarelo`
+- Barulho Alto: `Ícone Vermelho`
+
+<br/>
+
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/0e13fea1-2bd9-4771-b3a9-f95b8c412cbe" width="350px" alt="Notificacao"/>
+
+<br/>
+
+<h3>Cômodo/Sensor</h3>
+
+<p>No aplicativo, é possível visualizar as informações de cada cômodo e o sensor que está o monitorando. Também é possível editar suas informações, exceto a do tipo do sensor: Com ou sem fio, que pode somente ser determinada no momento da criação, já que isso influencia na conexão do sensor à rede.</p>
+
+O sensor pode ter 3 variações:
+
+- O totalmente sem fio, que funciona com baterias e que possui toda sua comunicação via Wifi.
+- O parcialmente sem fio, que faz sua comunicação via Wifi, porém precisa ser ligado na tomada para funcionar.
+- O totalmente com fio, que tem sua comunicação e alimentação totalmente feitas com fio.
 
 ##
 
