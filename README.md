@@ -11,8 +11,8 @@
 <p align="center">
  <a href="#definicao">O que é?</a> •
  <a href="#funcionamento">Funcionamento</a> •
- <a href="#demo">Mais sobre o App</a> •
- <a href="#hardware">Mais sobre o Hardware</a>
+ <a href="#demo">Mais sobre o App</a>
+<!-- <a href="#hardware">Mais sobre o Hardware</a> -->
 </p>
 
 ---
@@ -145,6 +145,12 @@ O sensor pode ter 3 variações:
 <img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/a79bfe80-e732-41c7-899d-38463720ee47" width="300px" alt="Sensor"/>
 <img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/151e90ba-bd8e-44cd-b667-c62f14466355" width="300px" alt="Sensor"/> -->
 
+<!-- 
+##
+
+<h3>Demonstração 🎥</h3>
+-->
+
 ##
 
 <div id="tecnologias">
@@ -191,11 +197,17 @@ O sensor pode ter 3 variações:
   <img align="center" alt="Figma" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
 </div>
 
+<!-- 
 ---
 
 <br/>
 
 <div id="hardware">
  <h2>Mais sobre o Hardware 🛰️</h2>
-</div>
-  
+</div> -->
+
+---
+
+<p align="center">🌟 Se você gostou, por favor considere dar uma estrela! 🌟</p>
+<div id="footer" align="center"><a href="https://www.linkedin.com/in/matheus-andrade23/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+<a href = "mailto:matheusandrade.ma2003@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a></div>
