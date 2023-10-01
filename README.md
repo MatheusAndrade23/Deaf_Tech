@@ -11,7 +11,8 @@
 <p align="center">
  <a href="#definicao">O que é?</a> •
  <a href="#funcionamento">Funcionamento</a> •
- <a href="#demo">Mais sobre o App</a>
+ <a href="#demo">Mais sobre o App</a> •
+ <a href="#hardware">Mais sobre o Hardware</a>
 </p>
 
 ---
@@ -67,6 +68,9 @@
 <p>• Uma outra dificuldade da pessoa surda, é com despertadores. Se a pessoa tem um sono pesado, ela sempre depende de outra para acordá-la. Visando isso,
   nosso sistema, a cada toque da campainha ou som detectado, a cama vibra, evitando que barulhos noturnos passem despercebidos. Isso é configurável, se o usuário não quiser ser acordado durante a noite, pode ser desativado.</p>
 
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/eabf612f-6cf7-46c9-8224-b53e906eaf77" width="350px" alt="Alarme"/>
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/a8173386-bcfe-483e-85dd-1a8432f39945" width="350px" alt="Alarme"/>
+
 ---
 
 <br/>
@@ -87,7 +91,7 @@
 
 ##
 
-<h3>Acessibilidade</h3>
+<h3>Acessibilidade 🧏</h3>
 
 <p>O design do Aplicativo foi feito visando deixar o mais visual possível, adotando convenções e colocando muitos ícones, para representar todas as informações e ações.</p>
 
@@ -118,7 +122,9 @@ Cada cor representa um nível de barulho diferente:
 
 <br/>
 
-<h3>Cômodo/Sensor</h3>
+##
+
+<h3>Cômodo/Sensor 🔊</h3>
 
 <p>No aplicativo, é possível visualizar as informações de cada cômodo e o sensor que está o monitorando. Também é possível editar suas informações, exceto a do tipo do sensor: Com ou sem fio, que pode somente ser determinada no momento da criação, já que isso influencia na conexão do sensor à rede.</p>
 
@@ -127,6 +133,17 @@ O sensor pode ter 3 variações:
 - O totalmente sem fio, que funciona com baterias e que possui toda sua comunicação via Wifi.
 - O parcialmente sem fio, que faz sua comunicação via Wifi, porém precisa ser ligado na tomada para funcionar.
 - O totalmente com fio, que tem sua comunicação e alimentação totalmente feitas com fio.
+
+<br/>
+
+![sensor_com_fio](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/b4470a12-53e8-4679-b964-215a52443fb4)
+![sensor_sem_fio](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/2cb45368-7684-4ead-95e5-cef76df9481a)
+![comodos](https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/151e90ba-bd8e-44cd-b667-c62f14466355)
+
+<!--- 
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/b98a0f4c-c962-4a0c-bb07-75d8cc501d09c" width="300px" alt="Sensor"/>
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/a79bfe80-e732-41c7-899d-38463720ee47" width="300px" alt="Sensor"/>
+<img src="https://github.com/MatheusAndrade23/Deaf_Tech/assets/84635540/151e90ba-bd8e-44cd-b667-c62f14466355" width="300px" alt="Sensor"/> -->
 
 ##
 
@@ -174,4 +191,11 @@ O sensor pode ter 3 variações:
   <img align="center" alt="Figma" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
 </div>
 
+---
+
+<br/>
+
+<div id="hardware">
+ <h2>Mais sobre o Hardware 🛰️</h2>
+</div>
   
