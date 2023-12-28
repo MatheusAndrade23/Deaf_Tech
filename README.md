@@ -24,10 +24,7 @@
 </div>
 
 
-<p> O Deaf Tech é um sistema que monitora um ambiente e notifica o usuário se algum barulho notável foi detectado. 
-  O sistema foi desenvolvido com o objetivo de resolver problemas enfrentados por pessoas surdas, que não conseguem perceber 
-  batidas, coisas caindo, campainhas, choro de bebês e diversos outros sons que podem ser importantes indicadores de problemas, 
-  que podem se tornar potencialmente perigosos se não forem percebidos. </p>
+<p> O Deaf Tech é um sistema que monitora um ambiente e notifica o usuário quando um barulho notável é detectado.  Foi desenvolvido com o objetivo de resolver problemas enfrentados por pessoas surdas, que não conseguem perceber batidas, coisas caindo, campainhas, choro de bebês e diversos outros sons que podem ser importantes indicadores de problemas e que podem se tornar potencialmente perigosos se não forem percebidos.</p>
   
 <p>
   <a href="http://www.youtube.com/watch?v=DXTmdkuJo0w&t">Clique aqui para ver Vídeo de Apresentação</a>
